@@ -1,0 +1,20 @@
+/* Reset de estilos para remover margens e paddings padrão */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Garante que a página ocupe 100% da altura da tela */
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5; /* Define um fundo cinza claro (pode personalizar) */
+}
+
+/* Remove margem extra no elemento root do React */
+#root {
+  height: 100%;
+}
