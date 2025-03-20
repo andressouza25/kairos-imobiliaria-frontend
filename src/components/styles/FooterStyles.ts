@@ -2,61 +2,55 @@ import styled from "styled-components";
 import { theme } from "../../styles/theme";
 
 export const FooterContainer = styled.footer`
-  background-color: ${theme.colors.secondary}; /* Cor de fundo azul escuro */
-  color: ${theme.colors.text}; /* Cor do texto branco */
-  text-align: center; /* Centraliza o conteúdo do rodapé */
-  padding: 16px 0; /* Adiciona espaçamento interno no topo e na base */
-  position: relative; /* Mantém o rodapé fixo na estrutura da página */
-  bottom: 0; /* Mantém o rodapé na parte inferior */
-  width: 100%; /* Garante que o rodapé ocupe toda a largura */
-  bottom: 0; /*  Fixa o footer na parte inferior */
+  background-color: ${theme.colors.secondary}; /* Cor de fundo */
+  color: ${theme.colors.text}; /* Cor do texto */
+  padding: 20px 0;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+`;
+
+export const FooterContent = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+`;
+
+export const InfoGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  p {
+    display: flex;
+    align-items: center; /* 🔥 Garante que o ícone e o texto fiquem alinhados */
+    gap: 8px;
+  }
 `;
 
 export const FooterText = styled.p`
-  margin: 0; /* Remove margens externas para um alinhamento melhor */
-  padding-top: 10px;
-  font-size: 12px; /* Define o tamanho do texto do rodapé */
-  color: ${theme.colors.text};
+  font-size: 12px;
+  font-weight: bold;
 `;
 
-export const FooterInfo = styled.div`
-  margin-top: 3px;
-  font-size: 16px;
-  line-height: 1.6;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  color: ${theme.colors.text};
+export const CopyrightText = styled.p`
+  font-size: 12px;
+  opacity: 0.7;
+  text-align: center;
+  width: 100%;
+  margin-top: 10px;
 `;
+
 export const Icon = styled.span`
   color: ${theme.colors.primary};
-  margin-right: 8px;
-  font-size: 18px;
-`;
-
-export const WhatsAppButton = styled.a`
+  font-size: 14px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: #25d366;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 5px;
-  font-size: 16px;
-  font-weight: bold;
-  text-decoration: none;
-  transition: 0.3s ease-in-out;
-  margin-top: 20px;
-  width: fit-content;
-  margin: auto;
-
-  &:hover {
-    background: #1ebe57;
-  }
-
-  svg {
-    font-size: 20px;
-  }
 `;

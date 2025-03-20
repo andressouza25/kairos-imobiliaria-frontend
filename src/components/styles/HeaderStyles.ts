@@ -4,7 +4,7 @@ import { theme } from "../../styles/theme";
 
 export const Navbar = styled.nav`
   display: flex; /* Usa flexbox para organizar os itens */
-  justify-content: space-between; /* Espaço igual entre logo e menu */
+  justify-content: space-around; /* Espaço igual entre logo e menu */
   align-items: center; /* Centraliza os itens verticalmente */
   padding: 16px 32px; /* Adiciona espaçamento interno (16px topo e baixo, 32px laterais) */
   background-color: ${theme.colors
@@ -18,13 +18,18 @@ export const Logo = styled.h1`
 `;
 
 export const NavLinks = styled.ul`
+  justify-content: space-evenly;
   display: flex; /* Organiza os links em linha */
   list-style: none; /* Remove os marcadores de lista padrão */
-  gap: 16px; /* Adiciona um espaçamento de 16px entre os links */
+  gap: 80px; /* Adiciona um espaçamento de 16px entre os links */
 `;
 
 export const NavItem = styled.li`
-  font-size: 18px; /* Define o tamanho da fonte dos itens do menu */
+  font-size: 22px; /* Define o tamanho da fonte dos itens do menu */
+  /* font-weight: 500; */
+  /* letter-spacing: 2px; */
+  /* font-family: "Bebas Neue", sans-serif; */
+  /* text-transform: uppercase; */
 `;
 
 export const StyledLink = styled(Link)`

@@ -1,11 +1,18 @@
-import Banner from "../components/Banner";
+import FeaturedProperties from "../components/FeaturedProperties";
+import SearchBar from "../components/SearchBar";
+import {
+  HomeContainer,
+  FeaturedSection,
+} from "../components/styles/HomeStyles";
 
 export default function Home() {
   return (
-    <>
-      <div>
-        <Banner />
-      </div>
-    </>
+    <HomeContainer>
+      <SearchBar />
+
+      <FeaturedSection>
+        <FeaturedProperties />
+      </FeaturedSection>
+    </HomeContainer>
   );
 }

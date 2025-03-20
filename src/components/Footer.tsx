@@ -1,8 +1,10 @@
 import {
   FooterContainer,
   FooterText,
-  FooterInfo,
   Icon,
+  CopyrightText,
+  FooterContent,
+  InfoGroup,
 } from "./styles/FooterStyles";
 import {
   FaMapMarkerAlt,
@@ -15,36 +17,50 @@ import { contacts } from "../data/contacts";
 export default function Footer() {
   return (
     <FooterContainer>
-      <FooterText>
-        © 2024 Kairós Imobiliária. Todos os direitos reservados.
-      </FooterText>
+      <FooterContent>
+        {/* Grupo 1: Rua e E-mail */}
+        <InfoGroup>
+          <p>
+            <Icon>
+              <FaMapMarkerAlt />
+            </Icon>{" "}
+            {contacts.address}
+          </p>
+          <p>
+            <Icon>
+              <FaEnvelope />
+            </Icon>{" "}
+            {contacts.email}
+          </p>
+          <p>
+            <Icon>
+              <FaWhatsapp />
+            </Icon>{" "}
+            {contacts.whatsapp}
+          </p>
+          <p>
+            <Icon>
+              <FaPhone />
+            </Icon>{" "}
+            {contacts.phone}
+          </p>
+        </InfoGroup>
 
-      <FooterInfo>
-        <p>
-          <Icon>
-            <FaMapMarkerAlt />
-          </Icon>{" "}
-          {contacts.address}
-        </p>
-        <p>
-          <Icon>
-            <FaPhone />
-          </Icon>{" "}
-          Telefone: {contacts.phone}
-        </p>
-        <p>
-          <Icon>
-            <FaWhatsapp />
-          </Icon>{" "}
-          WhatsApp: {contacts.whatsapp}
-        </p>
-        <p>
-          <Icon>
-            <FaEnvelope />
-          </Icon>{" "}
-          E-mail: {contacts.email}
-        </p>
-      </FooterInfo>
+        {/* Grupo 3: CRECI e CNPJ */}
+        <InfoGroup>
+          <FooterText>
+            <strong>CRECI:</strong> {contacts.creci}
+          </FooterText>
+          <FooterText>
+            <strong>CNPJ:</strong> {contacts.cnpj}
+          </FooterText>
+        </InfoGroup>
+      </FooterContent>
+
+      {/* Copyright centralizado abaixo */}
+      <CopyrightText>
+        &copy; 2025 Kairós Imobiliária. Todos os direitos reservados.
+      </CopyrightText>
     </FooterContainer>
   );
 }
