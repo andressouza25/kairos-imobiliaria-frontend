@@ -209,30 +209,34 @@ export const FilterExtraColumn = styled.div`
 `;
 
 export const LocationInputWrapper = styled.div`
-  width: 100%; //  Faz o campo ocupar 100% da área disponível
+  width: 100%;
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center; /* Centraliza o input */
+  margin-top: 10px; /* Espaçamento superior */
 `;
 
+// Input de localização com estilos ajustados
 export const LocationInputStyled = styled.input`
-  width: 300px; //  Garante que o input ocupe todo o espaço
-  padding: 1px 10px;
+  width: 100%; /* Faz o input ocupar 100% da largura disponível */
+  max-width: 350px; /* Limita a largura máxima para não ficar muito largo */
+  padding: 12px 15px; /* Ajuste do padding para maior conforto */
   font-size: 14px;
-  border: 1px solid ${theme.colors.border}; //  Borda suave
-  border-radius: 10px;
+  border: 1px solid ${theme.colors.border}; /* Borda suave */
+  border-radius: 10px; /* Bordas arredondadas */
   background: ${theme.colors.background};
   color: ${theme.colors.darkGray};
   transition: all 0.3s ease;
-  height: 50px; //  Ajusta a altura para igualar às outras boxes
+  height: 50px; /* Altura do campo de texto */
 
   &:focus {
-    border-color: ${theme.colors.primary}; //  Destaca a borda ao clicar
+    border-color: ${theme.colors.primary}; /* Borda colorida ao focar */
     outline: none;
-    box-shadow: 0 0 5px rgba(243, 152, 32, 0.3);
+    box-shadow: 0 0 5px rgba(243, 152, 32, 0.3); /* Efeito de sombra */
   }
 
   &::placeholder {
-    color: ${theme.colors.lightText}; //  Deixa o placeholder mais suave
+    color: ${theme.colors.lightText}; /* Cor do placeholder */
   }
 `;

@@ -13,6 +13,24 @@ import {
   ExtraFiltersContainer,
 } from "./styles/SearchBarStyles";
 
+// Interface para tipar os imóveis
+export interface Imovel {
+  _id: string;
+  title: string;
+  description: string;
+  price: number;
+  location: string;
+  imageUrl: string;
+  transactionType: string;
+  propertyType: string;
+  bedrooms: number;
+  suites: number;
+  bathrooms: number;
+  garage: number;
+  area: number;
+  destaque: boolean;
+}
+
 export default function SearchBar() {
   const [searchFilters, setSearchFilters] = useState({
     transactionType: "",
@@ -27,21 +45,37 @@ export default function SearchBar() {
   });
 
   const [showExtraFilters, setShowExtraFilters] = useState(false);
+  const [imoveis, setImoveis] = useState<Imovel[]>([]); // Tipando o estado com Imovel[]
 
   const handleChange = (name: string, value: string) => {
     setSearchFilters((prevFilters) => ({ ...prevFilters, [name]: value }));
   };
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     console.log("🔍 Filtros aplicados:", searchFilters);
+
+    try {
+      const searchParams = new URLSearchParams(searchFilters).toString();
+      const response = await fetch(
+        `${process.env.API_URL}/api/imoveis?${searchParams}`
+      );
+      const data = await response.json();
+
+      if (response.ok) {
+        setImoveis(data); // Armazenar os imóveis filtrados no estado
+      } else {
+        console.error("Erro ao buscar imóveis:", data.message);
+      }
+    } catch (error) {
+      console.error("Erro ao conectar com o servidor:", error);
+    }
   };
 
   return (
     <BannerContainer>
-      {/* 🔥 Barra de Pesquisa completa */}
       <SearchContainer>
         <FilterRow>
-          {/* Box "Pretensão" - Menor */}
+          {/* Box "Pretensão" */}
           <FilterColumn>
             <SelectField
               name="transactionType"
@@ -52,7 +86,7 @@ export default function SearchBar() {
             />
           </FilterColumn>
 
-          {/* Box "Tipo" - Menor */}
+          {/* Box "Tipo" */}
           <FilterColumn>
             <SelectField
               name="propertyType"
@@ -63,10 +97,9 @@ export default function SearchBar() {
             />
           </FilterColumn>
 
-          {/* Box "Localização" */}
+          {/* Barra de localização */}
           <FilterColumn wide>
             <LocationInput
-              value={searchFilters.location}
               onChange={(value) => handleChange("location", value)}
             />
           </FilterColumn>
@@ -86,7 +119,7 @@ export default function SearchBar() {
           </SearchButtonContainer>
         </FilterRow>
 
-        {/* 🔥 Filtros adicionais aparecem DENTRO da barra */}
+        {/* Filtros adicionais */}
         {showExtraFilters && (
           <ExtraFiltersContainer>
             {/* Coluna 1: Quartos & Suítes */}
@@ -151,6 +184,38 @@ export default function SearchBar() {
           </ExtraFiltersContainer>
         )}
       </SearchContainer>
+
+      {/* Exibir imóveis filtrados */}
+      <div>
+        {imoveis.length > 0 ? (
+          imoveis.map((imovel) => (
+            <div key={imovel._id} className="imovel-card">
+              <img src={imovel.imageUrl} alt={imovel.title} />
+              <h3>{imovel.title}</h3>
+              <p>{imovel.description}</p>
+              <p>
+                <strong>Preço:</strong> R${" "}
+                {imovel.price.toLocaleString("pt-BR")}
+              </p>
+              <p>
+                <strong>Localização:</strong> {imovel.location}
+              </p>
+              <p>
+                <strong>Tipo:</strong> {imovel.propertyType}
+              </p>
+              <p>
+                <strong>Quartos:</strong> {imovel.bedrooms}
+              </p>
+              <p>
+                <strong>Área:</strong> {imovel.area} m²
+              </p>
+              {imovel.destaque && <span>✨ Imóvel em Destaque</span>}
+            </div>
+          ))
+        ) : (
+          <p>Nenhum imóvel encontrado.</p>
+        )}
+      </div>
     </BannerContainer>
   );
 }

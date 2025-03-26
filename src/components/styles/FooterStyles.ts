@@ -30,7 +30,7 @@ export const InfoGroup = styled.div`
   font-weight: bold;
   p {
     display: flex;
-    align-items: center; /* 🔥 Garante que o ícone e o texto fiquem alinhados */
+    align-items: center;
     gap: 8px;
   }
 `;
@@ -40,17 +40,36 @@ export const FooterText = styled.p`
   font-weight: bold;
 `;
 
+export const Icon = styled.span`
+  color: ${theme.colors.primary};
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+`;
+
+export const Button = styled.button`
+  font-size: 14px;
+  background: none;
+  border: none;
+  color: ${theme.colors.text};
+  cursor: pointer;
+  transition: color 0.3s ease;
+  font-weight: bold;
+
+  &:hover {
+    color: ${theme.colors
+      .primary}; /* Altere a cor no hover para dar destaque */
+  }
+
+  /* Opções de exibição, centralizando os botões */
+  display: inline-block;
+  text-align: center;
+`;
+
 export const CopyrightText = styled.p`
   font-size: 12px;
   opacity: 0.7;
   text-align: center;
   width: 100%;
   margin-top: 10px;
-`;
-
-export const Icon = styled.span`
-  color: ${theme.colors.primary};
-  font-size: 14px;
-  display: flex;
-  align-items: center;
 `;

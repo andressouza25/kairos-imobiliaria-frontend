@@ -1,3 +1,5 @@
+import React from "react";
+import { useAuth } from "../contexts/AuthContext"; // Usando o hook para acessar o contexto
 import {
   FooterContainer,
   FooterText,
@@ -13,8 +15,12 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import { contacts } from "../data/contacts";
+import LogoutButton from "./LogoutButton";
+import LoginButton from "./LoginButton";
 
 export default function Footer() {
+  const { isAuthenticated } = useAuth(); // Usando o contexto para verificar se o usuário está logado
+
   return (
     <FooterContainer>
       <FooterContent>
@@ -54,6 +60,9 @@ export default function Footer() {
           <FooterText>
             <strong>CNPJ:</strong> {contacts.cnpj}
           </FooterText>
+
+          {/* Exibe o botão correto de Login ou Logout com base no estado de autenticação */}
+          {isAuthenticated ? <LogoutButton /> : <LoginButton />}
         </InfoGroup>
       </FooterContent>
 

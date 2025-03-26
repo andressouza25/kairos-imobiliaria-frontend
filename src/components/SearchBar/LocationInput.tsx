@@ -4,32 +4,37 @@ import usePlacesAutocomplete, {
 } from "use-places-autocomplete";
 import {
   Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
+  // ComboboxPopover,
+  // ComboboxList,
+  // ComboboxOption,
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
+
 import {
   LocationInputWrapper,
   LocationInputStyled,
-} from "../styles/SearchBarStyles";
+  SuggestionsPopover,
+  SuggestionsList,
+  SuggestionsOption,
+} from "../styles/LocationInputStyles"; // Importando os novos estilos
 
 interface LocationInputProps {
   value: string;
-  onChange: (value: string) => void;
+  onChange: (val: string) => void;
+  variant?: "default" | "form"; // permite controlar o estilo
 }
 
-export default function LocationInput({ onChange }: LocationInputProps) {
+export default function LocationInput({
+  value,
+  onChange,
+  variant = "default",
+}: LocationInputProps) {
   const {
     ready,
-    value: inputValue,
     setValue,
     suggestions: { status, data },
     clearSuggestions,
-  } = usePlacesAutocomplete({
-    debounce: 300,
-  });
+  } = usePlacesAutocomplete({ debounce: 300 });
 
   const handleSelect = async (address: string) => {
     setValue(address, false);
@@ -38,31 +43,32 @@ export default function LocationInput({ onChange }: LocationInputProps) {
 
     const results = await getGeocode({ address });
     const { lat, lng } = await getLatLng(results[0]);
-    console.log("Coordenadas:", { lat, lng });
+    console.log("📍 Coordenadas selecionadas:", lat, lng);
   };
 
   return (
     <LocationInputWrapper>
       <Combobox onSelect={handleSelect}>
-        <ComboboxInput
-          as={LocationInputStyled} // 🔥 Usa o novo estilo
-          value={inputValue}
+        <LocationInputStyled
+          value={value}
           onChange={(e) => {
             setValue(e.target.value);
             onChange(e.target.value);
           }}
           disabled={!ready}
-          placeholder="Digite a localização..."
+          placeholder="Localização"
+          $variant={variant}
         />
-        <ComboboxPopover>
-          {status === "OK" && (
-            <ComboboxList>
+
+        {status === "OK" && (
+          <SuggestionsPopover>
+            <SuggestionsList>
               {data.map(({ place_id, description }) => (
-                <ComboboxOption key={place_id} value={description} />
+                <SuggestionsOption key={place_id} value={description} />
               ))}
-            </ComboboxList>
-          )}
-        </ComboboxPopover>
+            </SuggestionsList>
+          </SuggestionsPopover>
+        )}
       </Combobox>
     </LocationInputWrapper>
   );

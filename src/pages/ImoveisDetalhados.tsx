@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getPropertyById } from "../services/propertyService";
+import { getPropertyById } from "../services/imovelService";
 import { PropertyDetailsContainer } from "../styles/PropertyDetailsStyles";
 
 type Property = {

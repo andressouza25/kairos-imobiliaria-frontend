@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { Navbar, NavLinks, NavItem, StyledLink } from "./styles/HeaderStyles";
+import { useAuth } from "../contexts/AuthContext";
 import logo from "../assets/logoBranco.png";
 
 export default function Header() {
+  const { isAuthenticated } = useAuth();
+
   return (
     <Navbar>
       <Link to="/">
@@ -18,6 +21,11 @@ export default function Header() {
         <NavItem>
           <StyledLink to="/contato">Contato</StyledLink>
         </NavItem>
+        {isAuthenticated && (
+          <NavItem>
+            <StyledLink to="/admin">Administrativo</StyledLink>
+          </NavItem>
+        )}
       </NavLinks>
     </Navbar>
   );
