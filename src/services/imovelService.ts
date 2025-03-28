@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Imovel } from "../data/ImovelData";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -31,4 +32,30 @@ export const deleteProperty = async (id: string, token: string | null) => {
     console.error("Erro ao deletar imóvel:", error);
     throw error;
   }
+};
+
+// src/services/imovelService.ts
+export const updateProperty = async (
+  propertyId: string,
+  propertyData: Partial<Imovel>,
+  token: string
+) => {
+  const response = await fetch(
+    `${import.meta.env.VITE_API_URL}/api/imoveis/${propertyId}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(propertyData),
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Erro ao atualizar imóvel");
+  }
+
+  const updatedProperty = await response.json();
+  return updatedProperty;
 };

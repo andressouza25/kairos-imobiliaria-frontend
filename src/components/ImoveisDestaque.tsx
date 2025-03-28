@@ -1,16 +1,14 @@
 import { FC } from "react";
-import ImovelCardDetalhado from "./ImovelCardDetalhados"; // Usando o card de imóvel
+import ImovelCardDetalhado from "./ImovelCardDetalhados";
 import {
   FeaturedSection,
   FeaturedTitle,
   FeaturedPropertiesGrid,
-  SeeMoreButton,
-} from "../styles/HomeStyles"; // Usando estilos definidos
-import { Imovel } from "../data/ImovelData"; // Importando a tipagem do Imovel
-import { Link } from "react-router-dom";
+} from "../styles/HomeStyles";
+import { Imovel } from "../data/ImovelData";
 
 type Props = {
-  imoveis: Imovel[]; // Agora tipado corretamente como Imovel[]
+  imoveis: Imovel[];
 };
 
 const FeaturedProperties: FC<Props> = ({ imoveis }) => {
@@ -22,9 +20,6 @@ const FeaturedProperties: FC<Props> = ({ imoveis }) => {
           <ImovelCardDetalhado key={imovel._id} imovel={imovel} />
         ))}
       </FeaturedPropertiesGrid>
-      <Link to="/imoveis">
-        <SeeMoreButton>Ver mais imóveis</SeeMoreButton>
-      </Link>
     </FeaturedSection>
   );
 };

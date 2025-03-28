@@ -9,5 +9,6 @@ export const theme = {
     inputBackground: "#222", // Fundo escuro para input
     border: "#ccc", // Cinza borda
     lightText: "#B0B0B0", // Cinza claro para textos em fundo escuro
+    Gray: "#939396", // Cinza claro
   },
 };

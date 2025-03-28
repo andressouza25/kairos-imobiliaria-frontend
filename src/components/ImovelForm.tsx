@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import {
   FormContainer,
   InputField,
@@ -8,45 +7,50 @@ import {
   FormSection,
   CheckboxLabel,
   FormTitle,
-} from "../styles/ImovelAddAndEditPage"; // Estilos importados
-import LocationInput from "../components/SearchBar/LocationInput"; // Importe o componente LocationInput
+  SelectField,
+} from "../styles/ImovelAddAndEditPage";
+import LocationInput from "./SearchBar/LocationInput";
+import { uploadToCloudinary } from "../utils/uploadToCloudinary";
+import { ImovelFormType } from "../data/ImovelData";
 
-const API_URL = import.meta.env.VITE_API_URL;
-
-type FormData = {
-  title: string;
-  description: string;
-  price: string;
-  location: string;
-  imageUrl: string;
-  propertyType: string;
-  transactionType: string;
-  bedrooms: string;
-  suites: string;
-  bathrooms: string;
-  garage: string;
-  area: string;
-  destaque: boolean;
+type Props = {
+  initialData?: ImovelFormType;
+  onSubmit: (data: ImovelFormType) => void;
+  isEditMode?: boolean;
 };
 
-export default function AddImovel() {
-  const navigate = useNavigate();
-
-  const [formData, setFormData] = useState<FormData>({
-    title: "",
-    description: "",
-    price: "",
-    location: "",
-    imageUrl: "",
-    propertyType: "",
-    transactionType: "",
-    bedrooms: "",
-    suites: "",
-    bathrooms: "",
-    garage: "",
-    area: "",
-    destaque: false,
+export default function ImovelForm({
+  initialData,
+  onSubmit,
+  isEditMode = false,
+}: Props) {
+  const [formData, setFormData] = useState<ImovelFormType>(() => {
+    return (
+      initialData || {
+        title: "",
+        description: "",
+        price: "",
+        location: "",
+        imageUrls: [],
+        propertyType: "",
+        transactionType: "",
+        bedrooms: "",
+        suites: "",
+        bathrooms: "",
+        garage: "",
+        area: "",
+        destaque: false,
+      }
+    );
   });
+
+  const [previewUrls, setPreviewUrls] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (initialData?.imageUrls) {
+      setPreviewUrls(initialData.imageUrls);
+    }
+  }, [initialData]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -56,31 +60,17 @@ export default function AddImovel() {
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prev) => ({
-      ...prev,
-      destaque: e.target.checked,
-    }));
+    setFormData((prev) => ({ ...prev, destaque: e.target.checked }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
-
-    await fetch(`${API_URL}/api/imoveis`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(formData),
-    });
-
-    navigate("/admin");
+    onSubmit(formData);
   };
 
   return (
     <FormContainer>
-      <FormTitle>Adicionar Imóvel</FormTitle>
+      <FormTitle>{isEditMode ? "Editar Imóvel" : "Adicionar Imóvel"}</FormTitle>
       <form onSubmit={handleSubmit}>
         <FormSection>
           <Label>Título</Label>
@@ -115,7 +105,6 @@ export default function AddImovel() {
           />
         </FormSection>
 
-        {/* Aqui está o campo de localização com as sugestões do Google */}
         <FormSection>
           <Label>Localização</Label>
           <LocationInput
@@ -128,36 +117,74 @@ export default function AddImovel() {
         </FormSection>
 
         <FormSection>
-          <Label>URL da Imagem</Label>
-          <InputField
-            type="text"
-            name="imageUrl"
-            value={formData.imageUrl}
-            onChange={handleChange}
-            placeholder="URL da Imagem"
+          <Label>Imagens</Label>
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={async (e) => {
+              const files = e.target.files;
+              if (!files) return;
+
+              for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+
+                const localUrl = URL.createObjectURL(file);
+                setPreviewUrls((prev) => [...prev, localUrl]);
+
+                try {
+                  const uploadedUrl = await uploadToCloudinary(file);
+                  setFormData((prev) => ({
+                    ...prev,
+                    imageUrls: [...prev.imageUrls, uploadedUrl],
+                  }));
+                } catch (error) {
+                  console.error("Erro ao enviar imagem:", error);
+                }
+              }
+            }}
           />
+          {previewUrls.length > 0 && (
+            <div style={{ marginTop: "10px" }}>
+              <h4>Pré-visualização:</h4>
+              <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                {previewUrls.map((url, index) => (
+                  <img
+                    key={index}
+                    src={url}
+                    alt={`Preview ${index + 1}`}
+                    style={{ width: "150px", borderRadius: "8px" }}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
         </FormSection>
 
         <FormSection>
-          <Label>Tipo (Casa/Apartamento)</Label>
-          <InputField
-            type="text"
+          <Label>Tipo</Label>
+          <SelectField
             name="propertyType"
             value={formData.propertyType}
             onChange={handleChange}
-            placeholder="Tipo (Casa/Apartamento)"
-          />
+          >
+            <option value="">Selecione o tipo</option>
+            <option value="Casa">Casa</option>
+            <option value="Apartamento">Apartamento</option>
+          </SelectField>
         </FormSection>
 
         <FormSection>
-          <Label>Pretensão (Comprar/Alugar)</Label>
-          <InputField
-            type="text"
+          <Label>Pretensão</Label>
+          <SelectField
             name="transactionType"
             value={formData.transactionType}
             onChange={handleChange}
-            placeholder="Pretensão (Comprar/Alugar)"
-          />
+          >
+            <option value="">Selecione a pretensão</option>
+            <option value="Comprar">Comprar</option>
+            <option value="Alugar">Alugar</option>
+          </SelectField>
         </FormSection>
 
         <FormSection>
@@ -194,13 +221,13 @@ export default function AddImovel() {
         </FormSection>
 
         <FormSection>
-          <Label>Vagas de Garagem</Label>
+          <Label>Vagas</Label>
           <InputField
             type="number"
             name="garage"
             value={formData.garage}
             onChange={handleChange}
-            placeholder="Vagas de Garagem"
+            placeholder="Garagem"
           />
         </FormSection>
 
@@ -227,7 +254,9 @@ export default function AddImovel() {
           </CheckboxLabel>
         </FormSection>
 
-        <SubmitButton type="submit">Adicionar Imóvel</SubmitButton>
+        <SubmitButton type="submit">
+          {isEditMode ? "Salvar Alterações" : "Adicionar Imóvel"}
+        </SubmitButton>
       </form>
     </FormContainer>
   );

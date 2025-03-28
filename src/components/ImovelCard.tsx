@@ -1,26 +1,12 @@
 import { FC } from "react";
-
-type Imovel = {
-  _id: string;
-  title: string;
-  description: string;
-  price: number;
-  location: string;
-  imageUrl: string;
-  transactionType: string;
-  propertyType: string;
-  bedrooms: number;
-  suites: number;
-  bathrooms: number;
-  garage: number;
-  area: number;
-  destaque: boolean;
-};
+import { Imovel } from "../data/ImovelData";
 
 const ImovelCard: FC<{ imovel: Imovel }> = ({ imovel }) => {
+  console.log("Imagem principal:", imovel.imageUrls?.[0]);
+
   return (
     <div className="imovel-card">
-      <img src={imovel.imageUrl} alt={imovel.title} />
+      <img src={imovel.imageUrls?.[0]} alt={imovel.title} />
       <h3>{imovel.title}</h3>
       <p>{imovel.description}</p>
       <p>

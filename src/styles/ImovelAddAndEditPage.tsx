@@ -67,3 +67,11 @@ export const SubmitButton = styled.button`
     background-color: ${theme.colors.darkPrimary};
   }
 `;
+
+export const SelectField = styled.select`
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+`;

@@ -1,13 +1,14 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import Home from "./pages/Home";
-import Imoveis from "./pages/Imoveis";
-import Contato from "./pages/Contato";
-import Sobre from "./pages/Sobre";
+import Home from "./pages/HomePage";
+import Imoveis from "./pages/ImoveisPage";
+import Contato from "./pages/ContatoPage";
+import Sobre from "./pages/SobrePage";
 import AdminPanel from "./pages/AdminPanel";
-import AddProperty from "./pages/ImovelAdd";
-import Login from "./pages/Login";
-import ImovelEdit from "./pages/ImovelEdit";
+import AddProperty from "./pages/ImovelAddPage";
+import Login from "./pages/LoginPage";
+import ImovelEdit from "./pages/ImovelEditPage";
 import { useAuth } from "./contexts/AuthContext"; // Para obter o estado de autenticação
+import ImovelDetalhesPage from "./pages/ImovelDetalhesPage";
 
 export default function AppRoutes() {
   const { isAuthenticated } = useAuth(); // Usa o hook para obter o estado de autenticação
@@ -32,6 +33,7 @@ export default function AppRoutes() {
         path="/admin/editar/:id"
         element={isAuthenticated ? <ImovelEdit /> : <Navigate to="/login" />}
       />
+      <Route path="/imoveis/:id" element={<ImovelDetalhesPage />} />
 
       {/* Rota de login - Redireciona para /admin se já estiver logado */}
       <Route

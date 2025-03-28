@@ -1,18 +1,6 @@
 import styled from "styled-components";
 import { theme } from "../../styles/theme";
 
-export const BannerContainer = styled.div`
-  width: 100%;
-  height: calc(100vh - 80px);
-  background-image: url("/src/assets/fundoPrincipal2.jpg");
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-`;
-
 export const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
