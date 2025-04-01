@@ -50,6 +50,7 @@ export const PropertyInfo = styled.div`
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 `;
 
 export const PropertyTitle = styled.h3`
@@ -85,16 +86,45 @@ export const IconsRow = styled.div`
 `;
 
 export const Icon = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   gap: 6px;
+  cursor: default;
+
+  &::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: ${theme.colors.darkGray};
+    color: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+    font-size: 12px;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+    visibility: hidden;
+  }
+
+  &:hover::after {
+    opacity: 1;
+    visibility: visible;
+  }
 `;
 
 export const PriceRow = styled.div`
   font-weight: 700;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid ${theme.colors.border};
 `;
 
 export const PropertyTag = styled.span`
@@ -105,4 +135,17 @@ export const PropertyTag = styled.span`
   border-radius: 5px;
   font-size: 0.8rem;
   font-weight: bold;
+`;
+
+export const DestaqueBadge = styled.span`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: ${theme.colors.primary};
+  color: white;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 1;
 `;

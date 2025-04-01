@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { ContatoContainer, Formulario, Botao } from "../styles/ContatoStyles";
+import ExitIntentModal from "../components/ExitIntentModal"; // ⬅️ Importa o modal
 
 export default function Contato() {
-  // Estados para armazenar os dados do formulário
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  // Função para lidar com o envio do formulário
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -26,9 +25,9 @@ export default function Contato() {
 
   return (
     <ContatoContainer>
+      <ExitIntentModal />
       <h1>Surgiu alguma dúvida?</h1>
       <p>Preencha o formulário abaixo e entraremos em contato com você.</p>
-
       <Formulario onSubmit={handleSubmit}>
         <label>Nome</label>
         <input

@@ -11,10 +11,10 @@ import {
   IconsRow,
   Icon,
   PriceRow,
-  PropertyTag,
+  DestaqueBadge, // 👈 novo badge importado
 } from "../styles/ImoveisFiltradosStyles";
-import { FiHome, FiMaximize2 } from "react-icons/fi";
-import { LuBath, LuBedDouble, LuCarFront } from "react-icons/lu";
+import { FiMaximize2 } from "react-icons/fi";
+import { LuShowerHead, LuBath, LuBedDouble, LuCarFront } from "react-icons/lu";
 import { Imovel } from "../data/ImovelData";
 
 type Props = {
@@ -27,8 +27,11 @@ const ImovelCardDetalhado: FC<Props> = ({ imovel }) => {
       to={`/imoveis/${imovel._id}`}
       style={{ textDecoration: "none", color: "inherit" }}
     >
-      <PropertyCard>
+      <PropertyCard style={{ position: "relative" }}>
+        {imovel.destaque && <DestaqueBadge>Destaque</DestaqueBadge>}
+
         <PropertyImage src={imovel.imageUrls?.[0]} alt={imovel.title} />
+
         <PropertyInfo>
           <PropertyTitle>{imovel.title}</PropertyTitle>
           <PropertyDescription>{imovel.description}</PropertyDescription>
@@ -44,26 +47,26 @@ const ImovelCardDetalhado: FC<Props> = ({ imovel }) => {
           </PropertyTypeAndTransaction>
 
           <IconsRow>
-            <Icon>
-              <FiHome /> {imovel.bedrooms}
+            <Icon data-tooltip="Quartos">
+              <LuBedDouble /> {imovel.bedrooms}
             </Icon>
-            <Icon>
-              <LuBath /> {imovel.bathrooms}
+            <Icon data-tooltip="Banheiros">
+              <LuShowerHead />
+              {imovel.bathrooms}
             </Icon>
-            <Icon>
-              <LuBedDouble /> {imovel.suites}
+            <Icon data-tooltip="Suítes">
+              <LuBath /> {imovel.suites}
             </Icon>
-            <Icon>
+            <Icon data-tooltip="Vagas de Garagem">
               <LuCarFront /> {imovel.garage}
             </Icon>
-            <Icon>
+            <Icon data-tooltip="Área do Imóvel">
               <FiMaximize2 /> {imovel.area} m²
             </Icon>
           </IconsRow>
 
           <PriceRow>
             <span>R$ {imovel.price.toLocaleString("pt-BR")}</span>
-            {imovel.destaque && <PropertyTag>Destaque</PropertyTag>}
           </PriceRow>
         </PropertyInfo>
       </PropertyCard>

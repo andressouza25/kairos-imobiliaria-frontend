@@ -5,13 +5,16 @@ import {
   ImageSection,
   InstagramButton,
 } from "../styles/SobreStyles";
-import ownersPhoto from "../assets/Kairos Donos.jpg"; // 🔥 Substitua pela foto real dos donos
+import ownersPhoto from "../assets/Kairos Donos.jpg";
 import { FaInstagram } from "react-icons/fa6";
+import ExitIntentModal from "../components/ExitIntentModal"; // 🔥 Importa o modal
 
 export default function Sobre() {
   const instagramUrl = "https://www.instagram.com/kairosimobiliariarp/";
+
   return (
     <Container>
+      <ExitIntentModal /> {/* Adiciona aqui no topo da renderização */}
       <Content>
         <TextSection>
           <h1>Sobre Nós</h1>

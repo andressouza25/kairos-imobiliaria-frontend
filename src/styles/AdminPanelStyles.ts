@@ -21,7 +21,6 @@ export const AddButton = styled.button`
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 1rem;
   border: none;
 
   &:hover {
@@ -129,5 +128,39 @@ export const HighlightButton = styled.button`
 
   &:hover {
     background-color: ${theme.colors.darkPrimary};
+  }
+`;
+
+export const TopControls = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 20px 0;
+`;
+
+export const SearchInput = styled.input`
+  padding: 10px 35px 10px 12px;
+  font-size: 14px;
+  border: 1px solid ${theme.colors.border};
+  border-radius: 8px;
+  background-color: ${theme.colors.text};
+  color: ${theme.colors.darkGray};
+  height: 40px;
+  width: 300px;
+  transition: all 0.3s ease;
+  background-image: url("data:image/svg+xml,%3Csvg fill='gray' height='18' viewBox='0 0 24 24' width='18' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.5 14h-.79l-.28-.27a6.471 6.471 0 001.48-5.34C15.19 5.01 12.17 2 8.5 2S1.81 5.01 1.81 8.39c0 3.38 3.02 6.39 6.69 6.39 1.61 0 3.09-.59 4.23-1.56l.27.28v.79l4.25 4.25c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41L15.5 14zm-7 0C6.01 14 4 11.99 4 9.5S6.01 5 8.5 5 13 7.01 13 9.5 10.99 14 8.5 14z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+
+  &::placeholder {
+    color: ${theme.colors.lightText};
+  }
+
+  &:focus {
+    outline: none;
+    border-color: ${theme.colors.primary};
+    box-shadow: 0 0 5px rgba(243, 152, 32, 0.3);
   }
 `;

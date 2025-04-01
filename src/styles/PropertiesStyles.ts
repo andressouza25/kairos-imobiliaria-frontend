@@ -19,14 +19,17 @@ export const PropertyList = styled.div`
 export const PropertyCard = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between; // 🔥 Garante que o botão fique na parte inferior
+  justify-content: space-between;
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 20px;
   width: 100%;
   max-width: 350px;
+  min-height: 600px;
+  max-height: 600px;
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
 
   img {
     width: 100%;
@@ -39,11 +42,15 @@ export const PropertyCard = styled.div`
   h2 {
     font-size: 1.3rem;
     margin-bottom: 10px;
+    flex-shrink: 0;
   }
 
   p {
     font-size: 0.95rem;
     margin: 4px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   p::first-letter {
@@ -73,4 +80,21 @@ export const DetailsButton = styled.button`
   &:hover {
     background-color: ${theme.colors.darkPrimary};
   }
+`;
+
+export const DestaqueBadge = styled.span`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: ${theme.colors.primary};
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 `;

@@ -13,6 +13,7 @@ export type Imovel = {
   garage: string | number;
   area: string | number;
   destaque: boolean;
+  createdAt?: string;
 };
 
 // Tipo usado exclusivamente para o formulário de criação/edição de imóvel
@@ -30,4 +31,5 @@ export type ImovelFormType = {
   garage: string;
   area: string;
   destaque: boolean;
+  createdAt?: string;
 };

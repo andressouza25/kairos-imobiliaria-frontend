@@ -6,10 +6,11 @@ import {
   HomeContainer,
   FeaturedSection,
 } from "../styles/HomeStyles";
-import { Imovel } from "../data/ImovelData"; // Importe a tipagem do Imovel
+import { Imovel } from "../data/ImovelData";
+import ExitIntentModal from "../components/ExitIntentModal"; // <-- IMPORTADO
 
 export default function Home() {
-  const [imoveisEmDestaque, setImoveisEmDestaque] = useState<Imovel[]>([]); // Tipagem correta de Imoveis
+  const [imoveisEmDestaque, setImoveisEmDestaque] = useState<Imovel[]>([]);
 
   useEffect(() => {
     const fetchImoveis = async () => {
@@ -19,7 +20,6 @@ export default function Home() {
         );
         const data = await response.json();
 
-        // Filtra até 3 imóveis com destaque
         const destacados = data
           .filter((imovel: Imovel) => imovel.destaque)
           .slice(0, 3);
@@ -34,6 +34,7 @@ export default function Home() {
 
   return (
     <HomeContainer>
+      <ExitIntentModal /> {/* ⬅️ Modal de saída inserido aqui */}
       <BannerContainer>
         <SearchBar />
       </BannerContainer>
