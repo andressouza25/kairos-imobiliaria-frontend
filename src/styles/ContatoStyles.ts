@@ -1,53 +1,91 @@
-import { theme } from "./theme";
 import styled from "styled-components";
+import { theme } from "./theme";
 
 export const ContatoContainer = styled.div`
-  max-width: 700px;
-  margin: auto;
-  text-align: center;
-  padding: 60px;
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
+    margin-bottom: 30px;
+    color: ${theme.colors.darkGray};
+  }
 `;
 
 export const Formulario = styled.form`
   display: flex;
-  margin-top: 10px;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
+`;
 
-  label {
-    font-weight: bold;
-    margin-top: 10px;
+export const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const StyledInput = styled.input<{ isError?: boolean }>`
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid ${({ isError }) => (isError ? "#e74c3c" : "#ccc")};
+  font-size: 1rem;
+
+  &:focus {
+    outline: none;
+    border-color: ${theme.colors.primary};
   }
+`;
 
-  input,
-  textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-  }
+export const StyledTextarea = styled.textarea<{ isError?: boolean }>`
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid ${({ isError }) => (isError ? "#e74c3c" : "#ccc")};
+  font-size: 1rem;
+  min-height: 120px;
+  resize: vertical;
 
-  textarea {
-    height: 120px;
-    resize: none;
+  &:focus {
+    outline: none;
+    border-color: ${theme.colors.primary};
   }
 `;
 
 export const Botao = styled.button`
-  background-color: ${theme.colors.primary};
+  background: ${theme.colors.primary};
+  color: white;
+  padding: 12px 20px;
   border: none;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 18px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  transition: 0.3s;
+  border-radius: 8px;
   font-weight: bold;
-  color: ${theme.colors.text};
+  cursor: pointer;
+  transition: 0.3s;
 
   &:hover {
-    color: ${theme.colors.darkGray};
+    background: ${theme.colors.darkPrimary};
   }
+`;
+
+export const ErrorText = styled.span`
+  color: #e74c3c;
+  font-size: 0.85rem;
+  margin-top: 4px;
+`;
+
+export const MensagemSucesso = styled.div`
+  background-color: ${theme.colors.primary || "#d4edda"};
+  color: ${theme.colors.text || "#155724"};
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  border: 1px solid ${theme.colors.primary || "#c3e6cb"};
+  text-align: center;
 `;

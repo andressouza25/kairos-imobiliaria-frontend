@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import ImovelForm from "../components/ImovelForm";
 import { Imovel } from "../data/ImovelData";
+import { Helmet } from "react-helmet-async"; // 🧠 Helmet para SEO
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -20,5 +21,17 @@ export default function AddImovel() {
     navigate("/admin");
   };
 
-  return <ImovelForm onSubmit={handleCreate} />;
+  return (
+    <>
+      <Helmet>
+        <title>Adicionar Imóvel | Painel Administrativo</title>
+        <meta
+          name="description"
+          content="Página para cadastrar um novo imóvel na plataforma da Kairós Imobiliária."
+        />
+      </Helmet>
+
+      <ImovelForm onSubmit={handleCreate} />
+    </>
+  );
 }

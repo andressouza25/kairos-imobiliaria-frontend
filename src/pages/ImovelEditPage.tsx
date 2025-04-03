@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ImovelForm from "../components/ImovelForm";
 import { Imovel, ImovelFormType } from "../data/ImovelData";
+import { Helmet } from "react-helmet-async"; // 🧠 SEO
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -15,7 +16,6 @@ export default function ImovelEdit() {
       const response = await fetch(`${API_URL}/api/imoveis/${id}`);
       const data: Imovel = await response.json();
 
-      // Converte os dados recebidos (números) para strings, como esperado pelo formulário
       setInitialData({
         ...data,
         price: String(data.price),
@@ -34,7 +34,6 @@ export default function ImovelEdit() {
   const handleUpdate = async (data: ImovelFormType) => {
     const token = localStorage.getItem("token");
 
-    // Converte os campos numéricos de volta para number antes de enviar
     const payload: Imovel = {
       ...data,
       price: Number(data.price),
@@ -60,10 +59,20 @@ export default function ImovelEdit() {
   if (!initialData) return <p>Carregando...</p>;
 
   return (
-    <ImovelForm
-      initialData={initialData}
-      onSubmit={handleUpdate}
-      isEditMode={true}
-    />
+    <>
+      <Helmet>
+        <title>Editar Imóvel | Painel Administrativo</title>
+        <meta
+          name="description"
+          content="Atualize as informações de um imóvel existente na plataforma da Kairós Imobiliária."
+        />
+      </Helmet>
+
+      <ImovelForm
+        initialData={initialData}
+        onSubmit={handleUpdate}
+        isEditMode={true}
+      />
+    </>
   );
 }

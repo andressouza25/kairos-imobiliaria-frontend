@@ -35,6 +35,7 @@ import {
   NextArrow,
 } from "../styles/ImovelDetalhadoStyles";
 import { Imovel } from "../data/ImovelData";
+import { Helmet } from "react-helmet-async";
 
 export default function ImovelDetalhesPage() {
   const { id } = useParams();
@@ -67,7 +68,6 @@ export default function ImovelDetalhesPage() {
     }
   }, [showImageModal]);
 
-  // Garantia de que 'imovel' foi carregado
   if (!imovel) return <p>Carregando imóvel...</p>;
 
   const {
@@ -95,6 +95,13 @@ export default function ImovelDetalhesPage() {
 
   return (
     <PageContainer>
+      <Helmet>
+        <title>{`${title} em ${location} | Kairós Imobiliária`}</title>
+        <meta
+          name="description"
+          content={`${title} - ${bedrooms} quartos, ${suites} suítes, ${area} m². Localizado em ${location}. Veja todos os detalhes desse imóvel na Kairós Imobiliária.`}
+        />
+      </Helmet>
       <InfoGrid>
         <MainImageContainer>
           {mainImage && (

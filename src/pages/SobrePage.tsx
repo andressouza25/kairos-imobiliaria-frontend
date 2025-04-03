@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import {
   Container,
   Content,
@@ -7,14 +8,22 @@ import {
 } from "../styles/SobreStyles";
 import ownersPhoto from "../assets/Kairos Donos.jpg";
 import { FaInstagram } from "react-icons/fa6";
-import ExitIntentModal from "../components/ExitIntentModal"; // 🔥 Importa o modal
+import ExitIntentModal from "../components/ExitIntentModal";
 
 export default function Sobre() {
   const instagramUrl = "https://www.instagram.com/kairosimobiliariarp/";
 
   return (
     <Container>
-      <ExitIntentModal /> {/* Adiciona aqui no topo da renderização */}
+      <Helmet>
+        <title>Sobre a Kairós Imobiliária</title>
+        <meta
+          name="description"
+          content="Conheça a história da Kairós Imobiliária, uma empresa focada em confiança, transparência e excelência no mercado imobiliário."
+        />
+      </Helmet>
+
+      <ExitIntentModal />
       <Content>
         <TextSection>
           <h1>Sobre Nós</h1>

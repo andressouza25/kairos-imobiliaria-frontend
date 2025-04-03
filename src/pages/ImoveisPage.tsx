@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet-async"; // SEO
+
 import {
   PageContainer,
   Title,
@@ -9,7 +11,7 @@ import { Imovel } from "../data/ImovelData";
 import ImovelCardDetalhado from "../components/ImovelCardDetalhados";
 import SearchBar from "../components/SearchBar";
 import { motion } from "framer-motion";
-import ExitIntentModal from "../components/ExitIntentModal"; // ⬅️ Importa o modal
+import ExitIntentModal from "../components/ExitIntentModal";
 
 export default function ImoveisPage() {
   const location = useLocation();
@@ -41,11 +43,21 @@ export default function ImoveisPage() {
 
   return (
     <PageContainer>
+      <Helmet>
+        <title>Imóveis à Venda e para Alugar | Kairós Imobiliária</title>
+        <meta
+          name="description"
+          content="Confira todos os imóveis disponíveis para venda ou aluguel. Filtre por tipo, localização, valor e mais."
+        />
+      </Helmet>
+
       <ExitIntentModal />
       <SearchBar />
+
       <Title>
         {hasFilters ? "Resultados da Busca" : "Imóveis Disponíveis"}
       </Title>
+
       {loading ? (
         <p>Carregando...</p>
       ) : imoveis.length === 0 ? (

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getPropertyById } from "../services/imovelService";
 import { PropertyDetailsContainer } from "../styles/PropertyDetailsStyles";
+import { Helmet } from "react-helmet-async";
 
 type Property = {
   _id: string;
@@ -17,11 +18,9 @@ export default function PropertyDetails() {
   const [property, setProperty] = useState<Property | null>(null);
 
   useEffect(() => {
-    console.log("Property ID:", id); // 🔥 Verificar se o ID está correto na URL
     const fetchProperty = async () => {
       if (id) {
         const data = await getPropertyById(id);
-        console.log("Fetched Property:", data); // 🔥 Verificar se os dados do imóvel estão sendo recebidos
         setProperty(data);
       }
     };
@@ -29,19 +28,24 @@ export default function PropertyDetails() {
   }, [id]);
 
   if (!property) {
-    return <p>Loading property details...</p>;
+    return <p>Carregando detalhes do imóvel...</p>;
   }
 
   return (
     <PropertyDetailsContainer>
+      <Helmet>
+        <title>{property.title} | Kairós Imobiliária</title>
+        <meta name="description" content={property.description.slice(0, 150)} />
+      </Helmet>
+
       <img src={property.imageUrl} alt={property.title} />
       <h1>{property.title}</h1>
       <p>{property.description}</p>
       <p>
-        <strong>Price:</strong> ${property.price}
+        <strong>Preço:</strong> R$ {property.price.toLocaleString("pt-BR")}
       </p>
       <p>
-        <strong>Location:</strong> {property.location}
+        <strong>Localização:</strong> {property.location}
       </p>
     </PropertyDetailsContainer>
   );

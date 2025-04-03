@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import FeaturedProperties from "../components/FeaturedProperties";
 import SearchBar from "../components/SearchBar";
 import {
@@ -7,7 +8,7 @@ import {
   FeaturedSection,
 } from "../styles/HomeStyles";
 import { Imovel } from "../data/ImovelData";
-import ExitIntentModal from "../components/ExitIntentModal"; // <-- IMPORTADO
+import ExitIntentModal from "../components/ExitIntentModal";
 
 export default function Home() {
   const [imoveisEmDestaque, setImoveisEmDestaque] = useState<Imovel[]>([]);
@@ -34,7 +35,16 @@ export default function Home() {
 
   return (
     <HomeContainer>
-      <ExitIntentModal /> {/* ⬅️ Modal de saída inserido aqui */}
+      {/* SEO */}
+      <Helmet>
+        <title>Imobiliária Kairós - Encontre o seu imóvel ideal</title>
+        <meta
+          name="description"
+          content="Descubra os melhores imóveis em destaque com a Imobiliária Kairós. Seu novo lar está aqui!"
+        />
+      </Helmet>
+
+      <ExitIntentModal />
       <BannerContainer>
         <SearchBar />
       </BannerContainer>
