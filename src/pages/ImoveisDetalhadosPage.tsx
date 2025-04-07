@@ -38,7 +38,10 @@ export default function PropertyDetails() {
         <meta name="description" content={property.description.slice(0, 150)} />
       </Helmet>
 
-      <img src={property.imageUrl} alt={property.title} />
+      <img
+        src={property.imageUrl}
+        alt={`Imagem do Imóvel ${property.title} `}
+      />
       <h1>{property.title}</h1>
       <p>{property.description}</p>
       <p>

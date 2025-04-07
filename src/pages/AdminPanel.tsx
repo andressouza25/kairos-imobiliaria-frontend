@@ -120,7 +120,7 @@ export default function AdminPanel() {
                     {property.imageUrls && property.imageUrls.length > 0 ? (
                       <img
                         src={property.imageUrls[0]}
-                        alt={property.title}
+                        alt={`Imagem do imóvel ${property.title}`}
                         style={{
                           width: "100%",
                           height: "150px",

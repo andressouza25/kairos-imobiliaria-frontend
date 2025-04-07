@@ -30,7 +30,10 @@ const ImovelCardDetalhado: FC<Props> = ({ imovel }) => {
       <PropertyCard style={{ position: "relative" }}>
         {imovel.destaque && <DestaqueBadge>Destaque</DestaqueBadge>}
 
-        <PropertyImage src={imovel.imageUrls?.[0]} alt={imovel.title} />
+        <PropertyImage
+          src={imovel.imageUrls?.[0]}
+          alt={`Imagem princial do imóvel ${imovel.title}`}
+        />
 
         <PropertyInfo>
           <PropertyTitle>{imovel.title}</PropertyTitle>

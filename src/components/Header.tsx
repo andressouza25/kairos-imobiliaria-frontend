@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <Navbar>
       <Link to="/">
-        <img src={logo} alt="Logo" width={200} />
+        <img src={logo} alt="Logo da Kairós" width={200} />
       </Link>
       <NavLinks>
         <NavItem>

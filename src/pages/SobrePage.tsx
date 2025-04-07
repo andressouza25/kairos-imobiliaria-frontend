@@ -48,7 +48,10 @@ export default function Sobre() {
         </TextSection>
 
         <ImageSection>
-          <img src={ownersPhoto} alt="Fundadores da Kairós Imobiliária" />
+          <img
+            src={ownersPhoto}
+            alt="Foto dos fundadores da Kairós Imobiliária"
+          />
         </ImageSection>
       </Content>
     </Container>

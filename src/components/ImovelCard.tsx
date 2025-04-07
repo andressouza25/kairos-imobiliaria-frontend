@@ -6,7 +6,10 @@ const ImovelCard: FC<{ imovel: Imovel }> = ({ imovel }) => {
 
   return (
     <div className="imovel-card">
-      <img src={imovel.imageUrls?.[0]} alt={imovel.title} />
+      <img
+        src={imovel.imageUrls?.[0]}
+        alt={`Imagem do Imóvel ${imovel.title} `}
+      />
       <h3>{imovel.title}</h3>
       <p>{imovel.description}</p>
       <p>
