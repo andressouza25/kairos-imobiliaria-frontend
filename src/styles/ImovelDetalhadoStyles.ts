@@ -40,7 +40,6 @@ const slideIn = keyframes`
   }
 `;
 
-// Botões de navegação (setas)
 export const NavArrow = styled.button`
   position: fixed;
   top: 50%;
@@ -69,11 +68,10 @@ export const RightArrow = styled(NavArrow)`
   right: 30px;
 `;
 
-// Imagem no modal com animação deslizante
 export const ImageModalContent = styled.img<{ direction: "left" | "right" }>`
   max-width: 90%;
   max-height: 90%;
-  border-radius: 10px;
+  border-radius: 8px;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
   cursor: pointer;
 
@@ -107,7 +105,6 @@ export const CarouselContainer = styled.div`
   max-width: 100%;
   height: 400px;
   overflow: hidden;
-  border-radius: 10px;
   margin-bottom: 2rem;
 
   @media (max-width: 768px) {
@@ -120,13 +117,12 @@ export const CarouselImage = styled.img`
   height: 100%;
   object-fit: cover;
   transition: opacity 0.3s ease;
-  border-radius: 10px;
 `;
 
 export const CarouselArrow = styled.button`
   position: absolute;
   top: 50%;
-  transform: translateY(-50%) translateY(2px); // Pequeno ajuste manual
+  transform: translateY(-50%) translateY(2px);
   background-color: rgba(0, 0, 0, 0.4);
   color: white;
   border: none;
@@ -138,8 +134,8 @@ export const CarouselArrow = styled.button`
   z-index: 10;
 
   display: flex;
-  align-items: center; // Centraliza conteúdo verticalmente
-  justify-content: center; // Centraliza conteúdo horizontalmente
+  align-items: center;
+  justify-content: center;
 
   transition: background-color 0.2s ease;
 
@@ -242,6 +238,34 @@ export const SubTitle = styled.h4`
   padding-bottom: 10px;
 `;
 
+export const SubTitleCard = styled.h4`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: ${theme.colors.darkGray};
+  margin: 0;
+  padding-bottom: 10px;
+`;
+
+export const BackButton = styled.button`
+  position: absolute;
+  top: 100px;
+  left: 10px;
+  background-color: ${theme.colors.primary};
+  color: ${theme.colors.text};
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  z-index: 1;
+  border: none;
+
+  &:hover {
+    background-color: ${theme.colors.darkPrimary};
+  }
+`;
+
 export const Price = styled.h2`
   color: ${theme.colors.secondary};
   margin: 1rem 0;
@@ -286,7 +310,6 @@ export const FeatureItem = styled.div`
   gap: 12px;
   font-size: 1rem;
   color: #444;
-  /* padding: 10px; */
   padding-right: 16px;
   padding-top: 12px;
   border-right: 1px solid #ddd;

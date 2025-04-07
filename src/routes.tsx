@@ -8,7 +8,7 @@ import AddProperty from "./pages/ImovelAddPage";
 import Login from "./pages/LoginPage";
 import ImovelEdit from "./pages/ImovelEditPage";
 import { useAuth } from "./contexts/AuthContext"; // Para obter o estado de autenticação
-import ImovelDetalhesPage from "./pages/ImovelDetalhesPage";
+import ImovelDetalhesPage from "./pages/ImovelDetalhadoPage";
 
 export default function AppRoutes() {
   const { isAuthenticated } = useAuth(); // Usa o hook para obter o estado de autenticação

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FiHome, FiMaximize2, FiTag } from "react-icons/fi";
 import {
@@ -33,11 +33,14 @@ import {
   RightArrow,
   PrevArrow,
   NextArrow,
+  BackButton,
+  SubTitleCard,
 } from "../styles/ImovelDetalhadoStyles";
 import { Imovel } from "../data/ImovelData";
 import { Helmet } from "react-helmet-async";
 
 export default function ImovelDetalhesPage() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [imovel, setImovel] = useState<Imovel | null>(null);
   const [mainImage, setMainImage] = useState<string | null>(null);
@@ -102,8 +105,10 @@ export default function ImovelDetalhesPage() {
           content={`${title} - ${bedrooms} quartos, ${suites} suítes, ${area} m². Localizado em ${location}. Veja todos os detalhes desse imóvel na Kairós Imobiliária.`}
         />
       </Helmet>
+
       <InfoGrid>
         <MainImageContainer>
+          <BackButton onClick={() => navigate(-1)}>Voltar</BackButton>
           {mainImage && (
             <CarouselContainer>
               <CarouselImage
@@ -176,7 +181,7 @@ export default function ImovelDetalhesPage() {
         </ContentColumn>
 
         <SideCard>
-          <SubTitle>Investimento</SubTitle>
+          <SubTitleCard>Investimento</SubTitleCard>
           <Price>R$ {price.toLocaleString("pt-BR")}</Price>
           <ContactButton
             href={`https://wa.me/5516994558101?text=Olá, tenho interesse no imóvel "${title}"`}
