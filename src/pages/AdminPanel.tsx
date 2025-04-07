@@ -127,6 +127,7 @@ export default function AdminPanel() {
                           objectFit: "cover",
                           borderRadius: "10px",
                         }}
+                        loading="lazy"
                       />
                     ) : (
                       <div

@@ -35,6 +35,7 @@ import {
   NextArrow,
   BackButton,
   SubTitleCard,
+  SpinnerContainer,
 } from "../styles/ImovelDetalhadoStyles";
 import { Imovel } from "../data/ImovelData";
 import { Helmet } from "react-helmet-async";
@@ -50,6 +51,7 @@ export default function ImovelDetalhesPage() {
     "right"
   );
   const [carouselIndex, setCarouselIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true); // Estado para controle de carregamento
 
   useEffect(() => {
     const fetchImovel = async () => {
@@ -60,6 +62,7 @@ export default function ImovelDetalhesPage() {
       setImovel(data);
       setMainImage(data.imageUrls?.[0]);
       setCurrentIndex(0);
+      setIsLoading(false); // Quando a informação for carregada, definimos isLoading como false
     };
 
     fetchImovel();
@@ -71,7 +74,9 @@ export default function ImovelDetalhesPage() {
     }
   }, [showImageModal]);
 
-  if (!imovel) return <p>Carregando imóvel...</p>;
+  if (isLoading) return <SpinnerContainer>Carregando...</SpinnerContainer>; // Exibe o spinner enquanto os dados estão carregando
+
+  if (!imovel) return <p>Imóvel não encontrado</p>;
 
   const {
     title,
@@ -120,15 +125,16 @@ export default function ImovelDetalhesPage() {
                   setSlideDirection("right");
                 }}
                 style={{ cursor: "zoom-in" }}
+                loading="lazy" // Carregamento assíncrono das imagens
               />
               {imageUrls.length > 1 && (
                 <>
                   <PrevArrow onClick={prevImage}>
                     <LuArrowLeft size={24} />
-                  </PrevArrow>{" "}
+                  </PrevArrow>
                   <NextArrow onClick={nextImage}>
                     <LuArrowRight size={24} />
-                  </NextArrow>{" "}
+                  </NextArrow>
                 </>
               )}
             </CarouselContainer>
@@ -168,6 +174,7 @@ export default function ImovelDetalhesPage() {
                 setMainImage(url);
                 setCarouselIndex(index);
               }}
+              loading="lazy" // Carregamento assíncrono das imagens
             />
           ))}
         </VerticalGallery>

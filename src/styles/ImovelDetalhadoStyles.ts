@@ -328,3 +328,16 @@ export const ContentColumn = styled.div`
   flex: 1;
   max-width: 65%;
 `;
+
+// Estilo para o container do spinner
+export const SpinnerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* O spinner ocupará toda a tela */
+  background-color: rgba(255, 255, 255, 0.8); /* Fundo semitransparente */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+`;
