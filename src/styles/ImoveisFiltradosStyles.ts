@@ -5,26 +5,27 @@ import { theme } from "./theme";
 // Container para a página
 export const PageContainer = styled.div`
   padding: 2rem;
+  @media (max-width: 768px) {
+    padding: 8px;
+  }
 `;
 
 // Título da página
 export const Title = styled.h1`
   margin-bottom: 2rem;
   margin-top: 2rem;
-  text-align: center; // Adicionando centralização
+  text-align: center;
 `;
 
 // Grid para os imóveis
 export const PropertiesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(300px, 1fr)
-  ); // Ajustando o tamanho da grid
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 24px;
   margin-top: 1rem;
   margin-bottom: 2rem;
 `;
+
 export const PropertyCard = styled.div`
   background-color: ${theme.colors.text};
   border-radius: 10px;

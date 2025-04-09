@@ -1,13 +1,12 @@
-import React from "react";
-import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import { theme } from "./styles/theme";
+import { BrowserRouter } from "react-router-dom";
 import Header from "./components/Header";
-import AppRoutes from "./routes";
 import Footer from "./components/Footer";
+import AppRoutes from "./routes";
 import WhatsAppButton from "./components/WhatsAppButton";
 import { Content, PageContainer } from "./components/styles/AppStyles";
-import { AuthProvider } from "./contexts/AuthContext"; // Importando o AuthProvider
+import { AuthProvider } from "./contexts/AuthContext";
+import { theme } from "./styles/theme";
 
 function App() {
   return (

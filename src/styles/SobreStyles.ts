@@ -13,6 +13,10 @@ export const Content = styled.div`
   justify-content: space-between;
   gap: 40px;
   flex-wrap: wrap;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const TextSection = styled.div`

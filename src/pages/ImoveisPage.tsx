@@ -52,6 +52,7 @@ export default function ImoveisPage() {
       </Helmet>
 
       <ExitIntentModal />
+
       <SearchBar />
 
       <Title>

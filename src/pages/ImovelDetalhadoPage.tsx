@@ -39,6 +39,7 @@ import {
 } from "../styles/ImovelDetalhadoStyles";
 import { Imovel } from "../data/ImovelData";
 import { Helmet } from "react-helmet-async";
+import { generateSlug } from "../utils/slugify";
 
 export default function ImovelDetalhesPage() {
   const navigate = useNavigate();

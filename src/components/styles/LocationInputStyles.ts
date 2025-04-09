@@ -23,7 +23,7 @@ export const LocationInputStyled = styled(ComboboxInput)<{
   border-radius: 10px;
   height: 50px;
   transition: 0.3s ease all;
-  background: ${theme.colors.background};
+  background: ${theme.colors.text};
   color: ${({ $variant }) =>
     $variant === "form" ? theme.colors.darkGray : theme.colors.darkGray};
 

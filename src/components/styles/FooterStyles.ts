@@ -2,22 +2,29 @@ import styled from "styled-components";
 import { theme } from "../../styles/theme";
 
 export const FooterContainer = styled.footer`
-  background-color: ${theme.colors.secondary}; /* Cor de fundo */
-  color: ${theme.colors.text}; /* Cor do texto */
+  background-color: ${theme.colors.secondary};
+  color: ${theme.colors.text};
   padding: 20px 0;
   width: 100%;
   position: relative;
   bottom: 0;
+  box-sizing: border-box; /* Para garantir que a largura não seja afetada pelo padding */
 `;
 
 export const FooterContent = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: flex-start;
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Adiciona wrap para os itens em telas pequenas */
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    align-items: center; /* Centraliza os itens */
+    gap: 10px; /* Ajuste o espaçamento entre os itens */
+  }
 `;
 
 export const InfoGroup = styled.div`
@@ -25,13 +32,20 @@ export const InfoGroup = styled.div`
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  gap: 5px;
+  gap: 10px;
   font-size: 12px;
   font-weight: bold;
+
+  /* Ajuste para os ícones e textos ficarem mais ajustados em telas pequenas */
   p {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    gap: 10px;
   }
 `;
 
@@ -61,7 +75,6 @@ export const Button = styled.button`
       .primary}; /* Altere a cor no hover para dar destaque */
   }
 
-  /* Opções de exibição, centralizando os botões */
   display: inline-block;
   text-align: center;
 `;
@@ -71,5 +84,9 @@ export const CopyrightText = styled.p`
   opacity: 0.7;
   text-align: center;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 15px;
+
+  @media (max-width: 768px) {
+    font-size: 14px; /* Aumenta o tamanho da fonte para melhor visibilidade */
+  }
 `;

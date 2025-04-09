@@ -1,5 +1,4 @@
-import React from "react";
-import { useAuth } from "../contexts/AuthContext"; // Usando o hook para acessar o contexto
+import { useAuth } from "../contexts/AuthContext";
 import {
   FooterContainer,
   FooterText,
@@ -19,7 +18,7 @@ import LogoutButton from "./LogoutButton";
 import LoginButton from "./LoginButton";
 
 export default function Footer() {
-  const { isAuthenticated } = useAuth(); // Usando o contexto para verificar se o usuário está logado
+  const { isAuthenticated } = useAuth();
 
   return (
     <FooterContainer>

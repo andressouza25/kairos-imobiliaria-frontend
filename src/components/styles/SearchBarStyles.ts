@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { theme } from "../../styles/theme";
 
+// Container principal da SearchBar
 export const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -14,8 +15,15 @@ export const SearchContainer = styled.div`
   min-width: 70%;
   max-width: 1400px;
   margin: auto;
+
+  /* Responsividade para dispositivos móveis */
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 8px;
+  }
 `;
 
+// Filtro principal (Pretensão e Tipo)
 export const FilterRow = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -23,8 +31,15 @@ export const FilterRow = styled.div`
   justify-content: space-between;
   width: 100%;
   gap: 10px;
+
+  /* Para mobile, os filtros vão empilhar e ocupar a largura total */
+  @media (max-width: 768px) {
+    flex-direction: column; /* Coloca os filtros um embaixo do outro */
+    gap: 16px;
+  }
 `;
 
+// Filtro individual (Cada coluna)
 export const FilterColumn = styled.div<{ small?: boolean; wide?: boolean }>`
   flex: ${({ small }) => (small ? "1" : "1.5")};
   min-width: ${({ small, wide }) =>
@@ -37,6 +52,13 @@ export const FilterColumn = styled.div<{ small?: boolean; wide?: boolean }>`
   align-items: center;
   justify-content: center;
   height: 100%;
+
+  /* Ajuste para dispositivos móveis */
+  @media (max-width: 768px) {
+    min-width: 100%; /* Faz com que os filtros ocupem toda a largura */
+    max-width: 100%;
+    flex: 1;
+  }
 `;
 
 export const SelectWrapper = styled.div`
@@ -50,7 +72,7 @@ export const Select = styled.select`
   font-size: 14px;
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 8px;
-  background: ${({ theme }) => theme.colors.background};
+  background: ${({ theme }) => theme.colors.text};
   color: ${({ theme }) => theme.colors.darkGray};
   transition: all 0.3s ease;
   height: 50px;
@@ -74,7 +96,7 @@ export const SelectContainer = styled.div`
   &::after {
     content: "⮟";
     position: absolute;
-    top: 50%;
+    top: 45%;
     right: 15px;
     bottom: 14px;
     transform: translateY(-50%);
@@ -84,43 +106,29 @@ export const SelectContainer = styled.div`
   }
 `;
 
-export const Label = styled.label<{ isActive: boolean }>`
-  position: absolute;
-  left: 12px;
-  font-size: ${({ isActive }) =>
-    isActive ? "10px" : "14px"}; /*  Diminui o tamanho quando ativado */
-  top: ${({ isActive }) =>
-    isActive ? "4px" : "50%"}; /*  Move para o topo ao clicar */
-  transform: ${({ isActive }) =>
-    isActive
-      ? "none"
-      : "translateY(-50%)"}; /*  Mantém centralizado inicialmente */
-  color: ${({ theme }) => theme.colors.lightText};
-  transition: 0.3s ease all;
-  pointer-events: none;
-  background: ${({ isActive, theme }) =>
-    isActive ? theme.colors.background : "transparent"};
-  padding: ${({ isActive }) => (isActive ? "0 5px" : "0")};
+// Filtros adicionais
+export const ExtraFiltersContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background: ${({ theme }) => theme.colors.background};
+  border-radius: 10px;
+  margin-top: 10px;
+
+  @media (max-width: 768px) {
+    gap: 16px;
+  }
 `;
 
-export const Input = styled.input`
-  width: 100%;
-  font-size: 14px;
-  border: 1px solid ${theme.colors.border};
-  border-radius: 8px;
-  background: ${theme.colors.background};
-  color: ${theme.colors.darkGray};
-  transition: all 0.3s ease;
-  height: 50px;
+export const FilterExtraColumn = styled.div`
   display: flex;
-  align-items: center;
-  line-height: normal;
-
-  &:focus {
-    border-color: ${theme.colors.primary};
-    outline: none;
-    box-shadow: 0 0 5px rgba(243, 152, 32, 0.3);
-  }
+  flex-direction: column;
+  flex: 1;
+  min-width: 180px;
+  max-width: 250px;
 `;
 
 export const SearchButton = styled.button`
@@ -142,6 +150,10 @@ export const SearchButton = styled.button`
   &:hover {
     background-color: ${theme.colors.darkPrimary};
   }
+
+  @media (max-width: 768px) {
+    width: 100%; /* Ajusta a largura para ocupar 100% no mobile */
+  }
 `;
 
 export const SearchButtonContainer = styled.div`
@@ -151,6 +163,11 @@ export const SearchButtonContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-left: -20px;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    width: 100%;
+  }
 `;
 
 export const ToggleFiltersButton = styled.button`
@@ -174,57 +191,24 @@ export const ToggleFiltersButton = styled.button`
     background: ${theme.colors.background};
     color: ${theme.colors.darkGray};
   }
-`;
 
-export const ExtraFiltersContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  background: ${({ theme }) => theme.colors.background};
-  border-radius: 10px;
-  margin-top: 10px;
-`;
-
-export const FilterExtraColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-width: 180px;
-  max-width: 250px;
-`;
-
-export const LocationInputWrapper = styled.div`
-  width: 100%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Centraliza o input */
-  margin-top: 10px; /* Espaçamento superior */
-`;
-
-// Input de localização com estilos ajustados
-export const LocationInputStyled = styled.input`
-  width: 100%; /* Faz o input ocupar 100% da largura disponível */
-  max-width: 350px; /* Limita a largura máxima para não ficar muito largo */
-  padding: 12px 15px; /* Ajuste do padding para maior conforto */
-  font-size: 14px;
-  border: 1px solid ${theme.colors.border}; /* Borda suave */
-  border-radius: 10px; /* Bordas arredondadas */
-  background: ${theme.colors.background};
-  color: ${theme.colors.darkGray};
-  transition: all 0.3s ease;
-  height: 50px; /* Altura do campo de texto */
-
-  &:focus {
-    border-color: ${theme.colors.primary}; /* Borda colorida ao focar */
-    outline: none;
-    box-shadow: 0 0 5px rgba(243, 152, 32, 0.3); /* Efeito de sombra */
+  @media (max-width: 768px) {
+    width: 100%;
   }
+`;
 
-  &::placeholder {
-    color: ${theme.colors.lightText}; /* Cor do placeholder */
-  }
+export const Label = styled.label<{ isActive: boolean }>`
+  position: absolute;
+  left: 12px;
+  font-size: ${({ isActive }) =>
+    isActive ? "10px" : "14px"}; /* Diminui o tamanho quando ativado */
+  top: ${({ isActive }) =>
+    isActive ? "4px" : "50%"}; /* Move para o topo ao clicar */
+  transform: ${({ isActive }) => (isActive ? "none" : "translateY(-50%)")};
+  color: ${({ theme }) => theme.colors.lightText};
+  transition: 0.3s ease all;
+  pointer-events: none;
+  background: ${({ isActive, theme }) =>
+    isActive ? theme.colors.background : "transparent"};
+  padding: ${({ isActive }) => (isActive ? "0 5px" : "0")};
 `;
