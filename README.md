@@ -1,6 +1,7 @@
 # Kairós Imobiliária
 
 Este é o frontend do projeto **Kairós Imobiliária**, desenvolvido com **React** e **TypeScript**. O frontend permite que usuários interajam com os imóveis cadastrados, visualizem detalhes e façam buscas filtradas.
+
 ![image](https://github.com/user-attachments/assets/3f0cfaaa-35e5-4f36-b776-d9fa8e0cf57a)
 
 ## Tecnologias Utilizadas
