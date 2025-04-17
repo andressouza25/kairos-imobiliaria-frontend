@@ -2,13 +2,6 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
-import {
-  Combobox,
-  // ComboboxPopover,
-  // ComboboxList,
-  // ComboboxOption,
-} from "@reach/combobox";
-import "@reach/combobox/styles.css";
 
 import {
   LocationInputWrapper,
@@ -16,12 +9,12 @@ import {
   SuggestionsPopover,
   SuggestionsList,
   SuggestionsOption,
-} from "../styles/LocationInputStyles"; // Importando os novos estilos
+} from "../styles/LocationInputStyles";
 
 interface LocationInputProps {
   value: string;
   onChange: (val: string) => void;
-  variant?: "default" | "form"; // permite controlar o estilo
+  variant?: "default" | "form";
 }
 
 export default function LocationInput({
@@ -48,28 +41,32 @@ export default function LocationInput({
 
   return (
     <LocationInputWrapper>
-      <Combobox onSelect={handleSelect}>
-        <LocationInputStyled
-          value={value}
-          onChange={(e) => {
-            setValue(e.target.value);
-            onChange(e.target.value);
-          }}
-          disabled={!ready}
-          placeholder="Localização"
-          $variant={variant}
-        />
+      <LocationInputStyled
+        value={value}
+        onChange={(e) => {
+          setValue(e.target.value);
+          onChange(e.target.value);
+        }}
+        disabled={!ready}
+        placeholder="Localização"
+        $variant={variant}
+        autoComplete="off"
+      />
 
-        {status === "OK" && (
-          <SuggestionsPopover>
-            <SuggestionsList>
-              {data.map(({ place_id, description }) => (
-                <SuggestionsOption key={place_id} value={description} />
-              ))}
-            </SuggestionsList>
-          </SuggestionsPopover>
-        )}
-      </Combobox>
+      {status === "OK" && (
+        <SuggestionsPopover>
+          <SuggestionsList>
+            {data.map(({ place_id, description }) => (
+              <SuggestionsOption
+                key={place_id}
+                onClick={() => handleSelect(description)}
+              >
+                {description}
+              </SuggestionsOption>
+            ))}
+          </SuggestionsList>
+        </SuggestionsPopover>
+      )}
     </LocationInputWrapper>
   );
 }

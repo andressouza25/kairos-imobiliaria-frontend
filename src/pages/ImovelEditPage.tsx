@@ -18,16 +18,15 @@ export default function ImovelEdit() {
 
       setInitialData({
         ...data,
-        price: String(data.price),
-        bedrooms: String(data.bedrooms),
-        suites: String(data.suites),
-        bathrooms: String(data.bathrooms),
-        garage: String(data.garage),
-        area: String(data.area),
+        price: Number(data.price),
+        bedrooms: Number(data.bedrooms),
+        suites: Number(data.suites),
+        bathrooms: Number(data.bathrooms),
+        garage: Number(data.garage),
+        area: Number(data.area),
         destaque: Boolean(data.destaque),
       });
     };
-
     fetchProperty();
   }, [id]);
 

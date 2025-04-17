@@ -70,16 +70,16 @@ export const Select = styled.select`
   width: 100%;
   padding: 16px 16px;
   font-size: 14px;
-  border: 1px solid ${({ theme }) => theme.colors.border};
+  border: 1px solid ${theme.colors.border};
   border-radius: 8px;
-  background: ${({ theme }) => theme.colors.text};
-  color: ${({ theme }) => theme.colors.darkGray};
+  background: ${theme.colors.text};
+  color: ${theme.colors.darkGray};
   transition: all 0.3s ease;
   height: 50px;
   appearance: none;
 
   &:focus {
-    border-color: ${({ theme }) => theme.colors.primary};
+    border-color: ${theme.colors.primary};
     outline: none;
   }
 
@@ -101,7 +101,7 @@ export const SelectContainer = styled.div`
     bottom: 14px;
     transform: translateY(-50%);
     font-size: 15px;
-    color: ${({ theme }) => theme.colors.darkGray};
+    color: ${theme.colors.darkGray};
     pointer-events: none;
   }
 `;
@@ -114,7 +114,7 @@ export const ExtraFiltersContainer = styled.div`
   align-items: center;
   gap: 10px;
   width: 100%;
-  background: ${({ theme }) => theme.colors.background};
+  background: ${theme.colors.background};
   border-radius: 10px;
   margin-top: 10px;
 
@@ -205,10 +205,9 @@ export const Label = styled.label<{ isActive: boolean }>`
   top: ${({ isActive }) =>
     isActive ? "4px" : "50%"}; /* Move para o topo ao clicar */
   transform: ${({ isActive }) => (isActive ? "none" : "translateY(-50%)")};
-  color: ${({ theme }) => theme.colors.lightText};
+  color: ${theme.colors.lightText};
   transition: 0.3s ease all;
   pointer-events: none;
-  background: ${({ isActive, theme }) =>
-    isActive ? theme.colors.background : "transparent"};
+  background: ${({ isActive }) => (isActive ? "#FFFFFF" : "transparent")};
   padding: ${({ isActive }) => (isActive ? "0 5px" : "0")};
 `;

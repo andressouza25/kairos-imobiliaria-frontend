@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Imovel } from "./SearchBar"; // Importe a interface do imóvel
+import { Imovel } from "../data/ImovelData"; // Importe a interface do imóvel
 
 const SearchResults = () => {
   const location = useLocation();

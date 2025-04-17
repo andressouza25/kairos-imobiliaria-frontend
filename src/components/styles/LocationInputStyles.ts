@@ -1,19 +1,13 @@
 // LocationInputStyles.ts
 import styled from "styled-components";
 import { theme } from "../../styles/theme";
-import {
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from "@reach/combobox";
 
 export const LocationInputWrapper = styled.div`
   width: 100%;
   position: relative;
 `;
 
-export const LocationInputStyled = styled(ComboboxInput)<{
+export const LocationInputStyled = styled.input<{
   $variant?: "default" | "form";
 }>`
   width: 100%;
@@ -38,7 +32,7 @@ export const LocationInputStyled = styled(ComboboxInput)<{
   }
 `;
 
-export const SuggestionsPopover = styled(ComboboxPopover)`
+export const SuggestionsPopover = styled.div`
   position: absolute;
   top: 100%;
   left: 0;
@@ -54,13 +48,13 @@ export const SuggestionsPopover = styled(ComboboxPopover)`
   margin-top: 5px;
 `;
 
-export const SuggestionsList = styled(ComboboxList)`
+export const SuggestionsList = styled.ul`
   list-style-type: none;
   padding: 0;
   margin: 0;
 `;
 
-export const SuggestionsOption = styled(ComboboxOption)`
+export const SuggestionsOption = styled.li`
   padding: 10px;
   cursor: pointer;
   background-color: ${theme.colors.background};

@@ -1,7 +1,6 @@
-import React from "react";
-import { useAuth } from "../contexts/AuthContext"; // Acesso ao contexto
+import { useAuth } from "../contexts/AuthContext";
 import { Button } from "./styles/FooterStyles";
-import { useNavigate } from "react-router-dom"; // Importando o hook useNavigate
+import { useNavigate } from "react-router-dom";
 
 export default function LogoutButton() {
   const { setIsAuthenticated } = useAuth(); // Usando o setter do contexto
