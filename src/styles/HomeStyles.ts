@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { theme } from "./theme";
+import backgroundImage from "../assets/fundoPrincipal2.jpg";
 
 export const HomeContainer = styled.div`
   display: flex;
@@ -10,7 +11,7 @@ export const HomeContainer = styled.div`
 export const BannerContainer = styled.div`
   width: 100%;
   height: calc(100vh - 80px);
-  background-image: url("/src/assets/fundoPrincipal2.jpg");
+  background-image: url(${backgroundImage});
   background-size: cover;
   background-position: center;
   display: flex;
