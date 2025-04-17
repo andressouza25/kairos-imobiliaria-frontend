@@ -29,6 +29,27 @@ Certifique-se de ter o **Node.js** (versão 14 ou superior) instalado.
 
 Clone o repositório do frontend:
 
-```bash
+```
 git clone https://github.com/seu-usuario/kairos-imobiliaria.git
 cd kairos-imobiliaria/frontend
+```
+
+### 2. Instalando as Dependências
+
+Instale as dependências do projeto:
+
+```
+npm install
+```
+
+### 3. Rodando o Projeto
+
+Para rodar o projeto no modo de desenvolvimento, use o comando:
+
+```
+npm run dev
+```
+
+
+
+
