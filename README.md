@@ -1,54 +1,34 @@
-# React + TypeScript + Vite
+# Kairós Imobiliária
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é o frontend do projeto **Kairós Imobiliária**, desenvolvido com **React** e **TypeScript**. O frontend permite que usuários interajam com os imóveis cadastrados, visualizem detalhes e façam buscas filtradas.
+![image](https://github.com/user-attachments/assets/3f0cfaaa-35e5-4f36-b776-d9fa8e0cf57a)
 
-Currently, two official plugins are available:
+## Tecnologias Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React** (com Vite) para a construção da interface.
+- **TypeScript** para tipos estáticos e segurança no código.
+- **Axios** para requisições HTTP.
+- **Styled Components** (ou CSS Modules) para estilização.
+- **Cloudinary** para upload e exibição de imagens de imóveis.
 
-## Expanding the ESLint configuration
+## Funcionalidades
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Página Inicial** com barra de pesquisa e imóveis em destaque.
+- **Busca de Imóveis** com filtros por preço, tipo e localização.
+- **Página de Detalhes** do imóvel com informações detalhadas e galeria de imagens.
+- **Formulário de Cadastro de Imóveis** para administradores.
+- **Integração com WhatsApp** para contato com atendentes.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Instalação
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Pré-requisitos
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Certifique-se de ter o **Node.js** (versão 14 ou superior) instalado.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+### 1. Clonando o Repositório
+
+Clone o repositório do frontend:
+
+```bash
+git clone https://github.com/seu-usuario/kairos-imobiliaria.git
+cd kairos-imobiliaria/frontend
