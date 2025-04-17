@@ -104,110 +104,112 @@ export default function AdminPanel() {
               property.propertyType.toLowerCase().includes(term)
             );
           })
-          .map((property) => (
-            <motion.div
-              key={property._id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-            >
-              <PropertyCard>
-                <StyledLink to={`/imoveis/${property._id}`}>
-                  <div style={{ position: "relative" }}>
-                    {property.destaque && (
-                      <DestaqueBadge>Destaque</DestaqueBadge>
-                    )}
-                    {property.imageUrls && property.imageUrls.length > 0 ? (
-                      <img
-                        src={property.imageUrls[0]}
-                        alt={`Imagem do imóvel ${property.title}`}
-                        style={{
-                          width: "100%",
-                          height: "150px",
-                          objectFit: "cover",
-                          borderRadius: "10px",
-                        }}
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div
-                        style={{
-                          width: "100%",
-                          height: "150px",
-                          backgroundColor: "#ccc",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          fontStyle: "italic",
-                          borderRadius: "10px",
-                        }}
-                      >
-                        Sem imagem
-                      </div>
-                    )}
-                  </div>
-                </StyledLink>
+          .map((property) => {
+            return (
+              <motion.div
+                key={property._id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+              >
+                <PropertyCard>
+                  <StyledLink to={`/imoveis/${property._id}`}>
+                    <div style={{ position: "relative" }}>
+                      {property.destaque && (
+                        <DestaqueBadge>Destaque</DestaqueBadge>
+                      )}
+                      {property.imageUrls && property.imageUrls.length > 0 ? (
+                        <img
+                          src={property.imageUrls[0]?.url} // Acessando diretamente 'url' da imagem
+                          alt={`Imagem do imóvel ${property.title}`}
+                          style={{
+                            width: "100%",
+                            height: "150px",
+                            objectFit: "cover",
+                            borderRadius: "10px",
+                          }}
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div
+                          style={{
+                            width: "100%",
+                            height: "150px",
+                            backgroundColor: "#ccc",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            fontStyle: "italic",
+                            borderRadius: "10px",
+                          }}
+                        >
+                          Sem imagem
+                        </div>
+                      )}
+                    </div>
+                  </StyledLink>
 
-                <h2 title={property.title}>
-                  {property.title.length > 40
-                    ? property.title.slice(0, 37) + "..."
-                    : property.title.charAt(0).toUpperCase() +
-                      property.title.slice(1)}
-                </h2>
+                  <h2 title={property.title}>
+                    {property.title.length > 40
+                      ? property.title.slice(0, 37) + "..."
+                      : property.title.charAt(0).toUpperCase() +
+                        property.title.slice(1)}
+                  </h2>
 
-                <p>
-                  {property.description.charAt(0).toUpperCase() +
-                    property.description.slice(1)}
-                </p>
-                <p>
-                  <strong>Localização:</strong> {property.location}
-                </p>
-                <p>
-                  <strong>Preço:</strong> R${" "}
-                  {property.price.toLocaleString("pt-BR")}
-                </p>
-                <p>
-                  <strong>Pretensão:</strong>{" "}
-                  {property.transactionType.charAt(0).toUpperCase() +
-                    property.transactionType.slice(1)}
-                </p>
-                <p>
-                  <strong>Tipo:</strong>{" "}
-                  {property.propertyType.charAt(0).toUpperCase() +
-                    property.propertyType.slice(1)}
-                </p>
-                <p>
-                  <strong>Quartos:</strong> {property.bedrooms}
-                </p>
-                <p>
-                  <strong>Suítes:</strong> {property.suites}
-                </p>
-                <p>
-                  <strong>Banheiros:</strong> {property.bathrooms}
-                </p>
-                <p>
-                  <strong>Vagas:</strong> {property.garage}
-                </p>
-                <em>
-                  <strong>Área:</strong> {property.area} m²
-                </em>
+                  <p>
+                    {property.description.charAt(0).toUpperCase() +
+                      property.description.slice(1)}
+                  </p>
+                  <p>
+                    <strong>Localização:</strong> {property.location}
+                  </p>
+                  <p>
+                    <strong>Preço:</strong> R${" "}
+                    {property.price.toLocaleString("pt-BR")}
+                  </p>
+                  <p>
+                    <strong>Pretensão:</strong>{" "}
+                    {property.transactionType.charAt(0).toUpperCase() +
+                      property.transactionType.slice(1)}
+                  </p>
+                  <p>
+                    <strong>Tipo:</strong>{" "}
+                    {property.propertyType.charAt(0).toUpperCase() +
+                      property.propertyType.slice(1)}
+                  </p>
+                  <p>
+                    <strong>Quartos:</strong> {property.bedrooms}
+                  </p>
+                  <p>
+                    <strong>Suítes:</strong> {property.suites}
+                  </p>
+                  <p>
+                    <strong>Banheiros:</strong> {property.bathrooms}
+                  </p>
+                  <p>
+                    <strong>Vagas:</strong> {property.garage}
+                  </p>
+                  <em>
+                    <strong>Área:</strong> {property.area} m²
+                  </em>
 
-                <ButtonGroup>
-                  <EditButton
-                    title="Editar imóvel"
-                    onClick={() => navigate(`/admin/editar/${property._id}`)}
-                  >
-                    <FaEdit /> Editar
-                  </EditButton>
-                  <DeleteButton
-                    onClick={() => handleDeleteClick(property._id || "")}
-                  >
-                    <FaTrash /> Excluir
-                  </DeleteButton>
-                </ButtonGroup>
-              </PropertyCard>
-            </motion.div>
-          ))}
+                  <ButtonGroup>
+                    <EditButton
+                      title="Editar imóvel"
+                      onClick={() => navigate(`/admin/editar/${property._id}`)}
+                    >
+                      <FaEdit /> Editar
+                    </EditButton>
+                    <DeleteButton
+                      onClick={() => handleDeleteClick(property._id || "")}
+                    >
+                      <FaTrash /> Excluir
+                    </DeleteButton>
+                  </ButtonGroup>
+                </PropertyCard>
+              </motion.div>
+            );
+          })}
       </PropertyList>
 
       {showModal && (

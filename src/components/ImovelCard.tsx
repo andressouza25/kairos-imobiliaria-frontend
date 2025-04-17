@@ -2,13 +2,15 @@ import { FC } from "react";
 import { Imovel } from "../data/ImovelData";
 
 const ImovelCard: FC<{ imovel: Imovel }> = ({ imovel }) => {
-  console.log("Imagem principal:", imovel.imageUrls?.[0]);
+  // Verifica a imagem principal
+  console.log("Imagem principal:", imovel.imageUrls?.[0]?.url);
 
   return (
     <div className="imovel-card">
+      {/* Exibe a primeira imagem usando a propriedade 'url' */}
       <img
-        src={imovel.imageUrls?.[0]}
-        alt={`Imagem do Imóvel ${imovel.title} `}
+        src={imovel.imageUrls?.[0]?.url} // Acessando a propriedade 'url' do primeiro item
+        alt={`Imagem do Imóvel ${imovel.title}`}
       />
       <h3>{imovel.title}</h3>
       <p>{imovel.description}</p>

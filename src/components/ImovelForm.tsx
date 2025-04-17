@@ -29,16 +29,16 @@ export default function ImovelForm({
       initialData || {
         title: "",
         description: "",
-        price: "",
+        price: 0, // Inicializando como número
         location: "",
-        imageUrls: [],
+        imageUrls: [], // Armazena as URLs do Cloudinary aqui
         propertyType: "",
         transactionType: "",
-        bedrooms: "",
-        suites: "",
-        bathrooms: "",
-        garage: "",
-        area: "",
+        bedrooms: 0, // Inicializando como número
+        suites: 0, // Inicializando como número
+        bathrooms: 0, // Inicializando como número
+        garage: 0, // Inicializando como número
+        area: 0, // Inicializando como número
         destaque: false,
       }
     );
@@ -48,7 +48,7 @@ export default function ImovelForm({
 
   useEffect(() => {
     if (initialData?.imageUrls) {
-      setPreviewUrls(initialData.imageUrls);
+      setPreviewUrls(initialData.imageUrls.map((image) => image.url));
     }
   }, [initialData]);
 
@@ -63,9 +63,37 @@ export default function ImovelForm({
     setFormData((prev) => ({ ...prev, destaque: e.target.checked }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+
+    // Verificar se há pelo menos uma imagem
+    if (formData.imageUrls.length === 0) {
+      alert("Por favor, adicione pelo menos uma imagem.");
+      return;
+    }
+
+    // Garantir que os dados sejam enviados no formato correto
+    const formattedData = {
+      title: formData.title,
+      description: formData.description,
+      price: formData.price,
+      location: formData.location,
+      imageUrls: formData.imageUrls, // A estrutura de imageUrls está correta
+      propertyType: formData.propertyType,
+      transactionType: formData.transactionType,
+      bedrooms: formData.bedrooms,
+      suites: formData.suites,
+      bathrooms: formData.bathrooms,
+      garage: formData.garage,
+      area: formData.area,
+      destaque: formData.destaque,
+    };
+
+    // Log para verificar os dados antes de enviar
+    console.log("Dados a serem enviados para o backend:", formattedData);
+
+    // Enviar os dados diretamente, sem a necessidade de conversão
+    onSubmit(formattedData);
   };
 
   return (
@@ -129,14 +157,22 @@ export default function ImovelForm({
               for (let i = 0; i < files.length; i++) {
                 const file = files[i];
 
+                // Adiciona a URL local para a pré-visualização
                 const localUrl = URL.createObjectURL(file);
                 setPreviewUrls((prev) => [...prev, localUrl]);
 
                 try {
+                  // Envia a imagem para o Cloudinary e adiciona o URL final e public_id ao estado
                   const uploadedUrl = await uploadToCloudinary(file);
                   setFormData((prev) => ({
                     ...prev,
-                    imageUrls: [...prev.imageUrls, uploadedUrl],
+                    imageUrls: [
+                      ...prev.imageUrls,
+                      {
+                        url: uploadedUrl.url,
+                        public_id: uploadedUrl.public_id,
+                      },
+                    ],
                   }));
                 } catch (error) {
                   console.error("Erro ao enviar imagem:", error);

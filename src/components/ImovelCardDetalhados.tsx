@@ -11,7 +11,7 @@ import {
   IconsRow,
   Icon,
   PriceRow,
-  DestaqueBadge, // 👈 novo badge importado
+  DestaqueBadge,
 } from "../styles/ImoveisFiltradosStyles";
 import { FiMaximize2 } from "react-icons/fi";
 import { LuShowerHead, LuBath, LuBedDouble, LuCarFront } from "react-icons/lu";
@@ -31,8 +31,8 @@ const ImovelCardDetalhado: FC<Props> = ({ imovel }) => {
         {imovel.destaque && <DestaqueBadge>Destaque</DestaqueBadge>}
 
         <PropertyImage
-          src={imovel.imageUrls?.[0]}
-          alt={`Imagem princial do imóvel ${imovel.title}`}
+          src={imovel.imageUrls?.[0]?.url}
+          alt={`Imagem principal do imóvel ${imovel.title}`}
         />
 
         <PropertyInfo>

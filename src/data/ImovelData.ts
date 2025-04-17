@@ -4,7 +4,7 @@ export type Imovel = {
   description: string;
   price: string | number;
   location: string;
-  imageUrls: string[];
+  imageUrls: { url: string; public_id: string }[]; // Alteração aqui
   propertyType: string;
   transactionType: string;
   bedrooms: string | number;
@@ -20,16 +20,16 @@ export type Imovel = {
 export type ImovelFormType = {
   title: string;
   description: string;
-  price: string; // string porque vem do input
+  price: number; // Mudar de string para number
   location: string;
-  imageUrls: string[]; // array de URLs das imagens
+  imageUrls: { url: string; public_id: string }[]; // Array de objetos com url e public_id
   propertyType: string;
   transactionType: string;
-  bedrooms: string; // todos os campos numéricos como string
-  suites: string;
-  bathrooms: string;
-  garage: string;
-  area: string;
+  bedrooms: number; // Mudar de string para number
+  suites: number; // Mudar de string para number
+  bathrooms: number; // Mudar de string para number
+  garage: number; // Mudar de string para number
+  area: number; // Mudar de string para number
   destaque: boolean;
   createdAt?: string;
 };

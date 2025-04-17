@@ -39,7 +39,6 @@ import {
 } from "../styles/ImovelDetalhadoStyles";
 import { Imovel } from "../data/ImovelData";
 import { Helmet } from "react-helmet-async";
-import { generateSlug } from "../utils/slugify";
 
 export default function ImovelDetalhesPage() {
   const navigate = useNavigate();
@@ -54,6 +53,7 @@ export default function ImovelDetalhesPage() {
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true); // Estado para controle de carregamento
 
+  // Fetch do imóvel e configuração dos estados
   useEffect(() => {
     const fetchImovel = async () => {
       const response = await fetch(
@@ -61,7 +61,7 @@ export default function ImovelDetalhesPage() {
       );
       const data = await response.json();
       setImovel(data);
-      setMainImage(data.imageUrls?.[0]);
+      setMainImage(data.imageUrls?.[0]?.url || undefined); // Ajuste para garantir URL válida
       setCurrentIndex(0);
       setIsLoading(false); // Quando a informação for carregada, definimos isLoading como false
     };
@@ -73,7 +73,7 @@ export default function ImovelDetalhesPage() {
     if (!showImageModal) {
       setCarouselIndex(currentIndex);
     }
-  }, [showImageModal]);
+  }, [showImageModal, currentIndex]);
 
   if (isLoading) return <SpinnerContainer>Carregando...</SpinnerContainer>; // Exibe o spinner enquanto os dados estão carregando
 
@@ -102,6 +102,11 @@ export default function ImovelDetalhesPage() {
     setCarouselIndex((prev) => (prev > 0 ? prev - 1 : imageUrls.length - 1));
   };
 
+  const closeImageModal = () => {
+    setShowImageModal(false);
+    setSlideDirection("right");
+  };
+
   return (
     <PageContainer>
       <Helmet>
@@ -118,7 +123,7 @@ export default function ImovelDetalhesPage() {
           {mainImage && (
             <CarouselContainer>
               <CarouselImage
-                src={imageUrls[carouselIndex]}
+                src={imageUrls[carouselIndex]?.url || mainImage}
                 alt="Imagem do imóvel"
                 onClick={() => {
                   setShowImageModal(true);
@@ -126,8 +131,9 @@ export default function ImovelDetalhesPage() {
                   setSlideDirection("right");
                 }}
                 style={{ cursor: "zoom-in" }}
-                loading="lazy" // Carregamento assíncrono das imagens
+                loading="lazy"
               />
+
               {imageUrls.length > 1 && (
                 <>
                   <PrevArrow onClick={prevImage}>
@@ -167,15 +173,15 @@ export default function ImovelDetalhesPage() {
         </MainImageContainer>
 
         <VerticalGallery>
-          {imageUrls.map((url, index) => (
+          {imageUrls.map((image, index) => (
             <Thumb
               key={index}
-              src={url}
+              src={image.url}
               onClick={() => {
-                setMainImage(url);
+                setMainImage(image.url);
                 setCarouselIndex(index);
               }}
-              loading="lazy" // Carregamento assíncrono das imagens
+              loading="lazy"
             />
           ))}
         </VerticalGallery>
@@ -203,17 +209,17 @@ export default function ImovelDetalhesPage() {
 
       {showImageModal && imageUrls.length > 0 && (
         <>
-          <ImageModalOverlay onClick={() => setShowImageModal(false)}>
+          <ImageModalOverlay onClick={closeImageModal}>
             <ImageModalContent
-              key={imageUrls[currentIndex]}
-              src={imageUrls[currentIndex]}
+              key={imageUrls[currentIndex]?.url || undefined}
+              src={imageUrls[currentIndex]?.url || undefined}
               alt="Imagem ampliada"
               direction={slideDirection}
               onClick={(e) => e.stopPropagation()}
             />
           </ImageModalOverlay>
 
-          <CloseButton onClick={() => setShowImageModal(false)}>×</CloseButton>
+          <CloseButton onClick={closeImageModal}>×</CloseButton>
 
           {currentIndex > 0 && (
             <LeftArrow
