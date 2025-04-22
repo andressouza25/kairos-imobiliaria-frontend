@@ -19,14 +19,16 @@ export const Title = styled.h1`
 
 // Grid para os imóveis
 export const PropertiesGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  width: 100%;
+  padding: 0 20px;
 `;
 
 export const PropertyCard = styled.div`
+  width: 450px; /* Tamanho fixo para todos os cards */
+  height: 420px; /* Altura fixa para os cards */
   background-color: ${theme.colors.text};
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -35,6 +37,9 @@ export const PropertyCard = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+
   &:hover {
     transform: translateY(-5px);
   }

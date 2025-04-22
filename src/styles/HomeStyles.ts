@@ -28,25 +28,28 @@ export const FeaturedSection = styled.section`
   border-radius: 10px;
   margin-top: 2rem;
   text-align: center;
-  h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
-    color: #333;
-  }
+
+  display: flex;
+  flex-direction: column; /* Para o título e imagens estarem empilhados */
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* Espaçamento entre os itens */
 `;
 
 export const FeaturedTitle = styled.h2`
-  text-align: center;
+  text-align: center; /* Centraliza o título */
   font-size: 24px;
   color: ${theme.colors.secondary};
   margin-bottom: 1rem;
 `;
 
 export const FeaturedPropertiesGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+  display: flex; /* Usando flexbox para alinhar os cards horizontalmente */
+  flex-wrap: wrap; /* Permite que os cards que não cabem na linha desçam para a linha seguinte */
+  justify-content: space-evenly; /* Distribui os cards igualmente ao longo da linha */
+  gap: 20px; /* Espaçamento entre os cards */
   margin-top: 20px;
+  width: 100%; /* Garante que os cards ocupem toda a largura disponível */
 `;
 
 export const SeeMoreButton = styled.button`

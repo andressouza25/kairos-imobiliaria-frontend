@@ -59,7 +59,7 @@ export default function SearchBar() {
         <FilterColumn>
           <SelectField
             name="transactionType"
-            label="Pretensão"
+            label="O que deseja?"
             value={searchFilters.transactionType}
             onChange={(e) => handleChange("transactionType", e.target.value)}
             options={filterOptions.transactionType}
