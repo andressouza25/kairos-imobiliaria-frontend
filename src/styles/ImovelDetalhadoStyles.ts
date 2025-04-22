@@ -103,7 +103,7 @@ export const CarouselContainer = styled.div`
   position: relative;
   width: 100%;
   max-width: 100%;
-  height: 400px;
+  height: 500px;
   overflow: hidden;
   margin-bottom: 2rem;
 
@@ -192,6 +192,7 @@ export const InfoGrid = styled.div`
 `;
 
 export const MainImageContainer = styled.div`
+  position: relative;
   flex: 3;
 `;
 
@@ -250,19 +251,24 @@ export const SubTitleCard = styled.h4`
 
 export const BackButton = styled.button`
   position: absolute;
-  top: 100px;
-  left: 10px;
+  top: 20px; /* Ajuste para que o botão fique mais próximo do topo da imagem */
+  left: 20px; /* Ajuste para o botão ficar mais próximo à esquerda da imagem */
   background-color: ${theme.colors.primary};
   color: ${theme.colors.text};
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
-  z-index: 1;
+  z-index: 10; /* Garante que o botão fique sobre outros elementos */
   border: none;
 
   &:hover {
     background-color: ${theme.colors.darkPrimary};
+  }
+
+  @media (max-width: 768px) {
+    top: 10px;
+    left: 10px;
   }
 `;
 
